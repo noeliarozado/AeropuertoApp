@@ -2,8 +2,11 @@ package com.mycompany.actividad1.dto;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author noeli
+ */
 public class Compania implements Serializable {
-
     private int prefijo;
     private String codigo;
     private String nombreCompania;
@@ -12,8 +15,8 @@ public class Compania implements Serializable {
     private String telefonoPasajero;
     private String telefonoAeropuerto;
 
-    public Compania(int prefijo, String codigo, String nombreCompania, String direccion, 
-            String municipio, String telefonoPasajero, String telefonoAeropuerto) {
+    public Compania(int prefijo, String codigo, String nombreCompania, String direccion, String municipio, 
+            String telefonoPasajero, String telefonoAeropuerto) {
         this.prefijo = prefijo;
         this.codigo = codigo;
         this.nombreCompania = nombreCompania;
