@@ -12,7 +12,7 @@ public final class VueloTableModel extends AbstractTableModel {
     List<VueloDiario> vuelosDiarios;
     List<Vuelo> listaVuelo;
 
-    String[] titulos = {"Codigo vuelo", "Fecha", "Hora de salida", "Hoa de llegada", "Aeropuerto origen", 
+    String[] titulos = {"Codigo vuelo", "Fecha", "Hora de salida", "Hora de llegada", "Aeropuerto origen", 
         "Aeropuerto destino"};
 
     public VueloTableModel(List<VueloDiario> vuelosDiarios, List<Vuelo> listaVuelo) {

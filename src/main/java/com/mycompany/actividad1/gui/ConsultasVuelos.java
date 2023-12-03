@@ -1,16 +1,42 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Vuelo;
+import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author noeli
  */
 public class ConsultasVuelos extends javax.swing.JFrame {
 
+    private LogicaVuelo logicaVuelo = new LogicaVuelo();
+
     /**
      * Creates new form ConsultasVuelos
      */
     public ConsultasVuelos() {
         initComponents();
+
+        List<Vuelo> vuelos = logicaVuelo.getListaVuelos();
+
+        Object[][] datos = new Object[vuelos.size()][];
+        String[] titulos = {"Código de vuelo", "Aeropuerto origen", "Aeropuerto destinp", "Número de plazas",
+            "Hora oficial de salida", "Hora oficial de llegada", "Días"};
+
+        int i = 0;
+        for (Vuelo vuelo : vuelos) {
+            Object[] fila = new Object[]{vuelo.getCodigoVuelo(), vuelo.getAeropuertoOrigen().getNombreCiudad(),
+                vuelo.getAeropuertoDestino().getNombreCiudad(), vuelo.getNumeroPlazas(),
+                vuelo.getHoraOficialSalida(), vuelo.getHoraOficialLlegada(), vuelo.getDias()};
+            datos[i] = fila;
+            i++;
+        }
+
+        DefaultTableModel dataModel = new DefaultTableModel(datos, titulos);
+
+        flightsTable.setModel(dataModel);
     }
 
     /**
@@ -22,17 +48,36 @@ public class ConsultasVuelos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        flightsTable = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        flightsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+            }
+        ));
+        jScrollPane1.setViewportView(flightsTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -74,5 +119,7 @@ public class ConsultasVuelos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable flightsTable;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

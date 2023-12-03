@@ -22,21 +22,47 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGestionCompanias = new javax.swing.JButton();
+        btnGestionVuelos = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnGestionCompanias.setText("Gestión de compañías");
+        btnGestionCompanias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionCompaniasActionPerformed(evt);
+            }
+        });
+
+        btnGestionVuelos.setText("Gestión de vuelos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(btnGestionCompanias)
+                .addGap(18, 18, 18)
+                .addComponent(btnGestionVuelos)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGestionCompanias)
+                    .addComponent(btnGestionVuelos))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGestionCompaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionCompaniasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGestionCompaniasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +100,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGestionCompanias;
+    private javax.swing.JButton btnGestionVuelos;
     // End of variables declaration//GEN-END:variables
 }

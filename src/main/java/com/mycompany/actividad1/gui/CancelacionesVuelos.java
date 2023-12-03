@@ -1,16 +1,27 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Vuelo;
+import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author noeli
  */
 public class CancelacionesVuelos extends javax.swing.JFrame {
 
+    private LogicaVuelo logicaVuelo = new LogicaVuelo();
+
     /**
      * Creates new form CancelacionesVuelos
      */
     public CancelacionesVuelos() {
         initComponents();
+
+        List<Vuelo> vuelos = logicaVuelo.getListaVuelos();
+
+        comboVuelos.setModel(new DefaultComboBoxModel(vuelos.toArray()));
     }
 
     /**
@@ -22,21 +33,57 @@ public class CancelacionesVuelos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        btnBorrar = new javax.swing.JButton();
+        comboVuelos = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel3.setText("Seleccione un vuelo:");
+
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3)
+                .addGap(41, 41, 41)
+                .addComponent(comboVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBorrar)
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(comboVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(btnBorrar)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        logicaVuelo.borrarVuelo(((Vuelo) comboVuelos.getSelectedItem()).getCodigoVuelo());
+
+        List<Vuelo> vuelos = logicaVuelo.getListaVuelos();
+        comboVuelos.setModel(new DefaultComboBoxModel(vuelos.toArray()));
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +121,8 @@ public class CancelacionesVuelos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JComboBox<String> comboVuelos;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

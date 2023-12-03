@@ -1,16 +1,46 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Aeropuerto;
+import com.mycompany.actividad1.dto.VueloTableModel;
+import com.mycompany.actividad1.dto.VueloDiario;
+import com.mycompany.actividad1.dto.Vuelo;
+import com.mycompany.actividad1.logica.LogicaAeropuerto;
+import com.mycompany.actividad1.logica.LogicaVueloDiario;
+import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author noeli
  */
 public class ConsultasLlegadas extends javax.swing.JFrame {
+    private LogicaVueloDiario logicaVuelosDiarios = new LogicaVueloDiario();
+    private LogicaVuelo logicavuelos = new LogicaVuelo();
+    private LogicaAeropuerto logicaAeropuerto = new LogicaAeropuerto();
 
     /**
      * Creates new form ConsultasLlegadas
      */
     public ConsultasLlegadas() {
         initComponents();
+
+        actualizarTabla(LocalDate.now());
+
+        Aeropuerto miAeropuerto = logicaAeropuerto.getAeropuertoActual();
+
+//        apiTemperaturasMiAeropuerto.cambiarCiudad(miAeropuerto.getCodigoMunicipio());
+    }
+
+    private void actualizarTabla(LocalDate date) {
+        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarVuelosLlegada(date);
+
+        List<Vuelo> listaVuelos = logicavuelos.getListaVuelos();
+
+        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
+
+        tblLlegadas.setModel(dataModel);
     }
 
     /**
@@ -22,21 +52,120 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        inputMes = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        JScrollPane = new javax.swing.JScrollPane();
+        tblLlegadas = new javax.swing.JTable();
+        inputAno = new javax.swing.JTextField();
+        inputDia = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnSeleccionarFecha = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Año");
+
+        tblLlegadas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblLlegadas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblLlegadasMousePressed(evt);
+            }
+        });
+        JScrollPane.setViewportView(tblLlegadas);
+
+        jLabel3.setText("Día");
+
+        jLabel2.setText("Mes");
+
+        btnSeleccionarFecha.setText("Seleccionar fecha");
+        btnSeleccionarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarFechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(btnSeleccionarFecha))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(inputMes)
+                                .addComponent(inputAno, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addComponent(inputDia)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(inputAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(inputMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSeleccionarFecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblLlegadasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLlegadasMousePressed
+        if (tblLlegadas.getSelectedRow() != -1) {
+            VueloTableModel llegadasTableModel = (VueloTableModel) tblLlegadas.getModel();
+            try {
+//                apiTemperaturasOtroAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoDestinoEn(tblLlegadas.getSelectedRow()));
+            } catch (NullPointerException np) {
+                JOptionPane.showMessageDialog(null, "Sin información.");
+            }
+        }
+    }//GEN-LAST:event_tblLlegadasMousePressed
+
+    private void btnSeleccionarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarFechaActionPerformed
+        int dia = Integer.parseInt(inputDia.getText());
+        int mes = Integer.parseInt(inputMes.getText());
+        int ano = Integer.parseInt(inputAno.getText());
+
+        LocalDate selectedDate = LocalDate.of(ano, mes, dia);
+
+        actualizarTabla(selectedDate);
+    }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +203,14 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane;
+    private javax.swing.JButton btnSeleccionarFecha;
+    private javax.swing.JTextField inputAno;
+    private javax.swing.JTextField inputDia;
+    private javax.swing.JTextField inputMes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTable tblLlegadas;
     // End of variables declaration//GEN-END:variables
 }

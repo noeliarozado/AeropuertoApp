@@ -1,16 +1,57 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Compania;
+import com.mycompany.actividad1.dto.VueloTableModel;
+import com.mycompany.actividad1.dto.VueloDiario;
+import com.mycompany.actividad1.dto.Vuelo;
+import com.mycompany.actividad1.logica.LogicaAeropuerto;
+import com.mycompany.actividad1.logica.LogicaCompania;
+import com.mycompany.actividad1.logica.LogicaVueloDiario;
+import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author noeli
  */
 public class ConsultasVuelosCompanias extends javax.swing.JFrame {
 
+    private LogicaVueloDiario logicaVuelosDiarios = new LogicaVueloDiario();
+    private LogicaCompania logicaCompanias = new LogicaCompania();
+    private LogicaVuelo logicaVuelos = new LogicaVuelo();
+    private LogicaAeropuerto logicaAeropuerto = new LogicaAeropuerto();
+
     /**
      * Creates new form ConsultasVuelosCompanias
      */
     public ConsultasVuelosCompanias() {
         initComponents();
+        List<Compania> companias = logicaCompanias.getListaCompanias();
+
+        String[] codigos = new String[companias.size()];
+        int i = 0;
+        for (Compania compania : companias) {
+            codigos[i] = compania.getCodigo();
+            i++;
+        }
+
+        comboCompanias.setModel(new DefaultComboBoxModel(codigos));
+
+        actualizarTabla(LocalDate.now());
+    }
+
+    private void actualizarTabla(LocalDate date) {
+        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.mostrarDiasCompania((String) comboCompanias.getSelectedItem(),
+                date);
+
+        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
+
+        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
+
+        tblVuelosCompania.setModel(dataModel);
     }
 
     /**
@@ -22,21 +63,139 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        inputMes = new javax.swing.JTextField();
+        inputDia = new javax.swing.JTextField();
+        inputAno = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblVuelosCompania = new javax.swing.JTable();
+        btnSeleccionarFecha = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        comboCompanias = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Año:");
+
+        jLabel3.setText("Mes:");
+
+        jLabel4.setText("Día:");
+
+        tblVuelosCompania.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblVuelosCompania.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblVuelosCompaniaMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblVuelosCompania);
+
+        btnSeleccionarFecha.setText("Seleccionar fecha:");
+        btnSeleccionarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarFechaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Compañía:");
+
+        comboCompanias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCompaniasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboCompanias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputDia, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(inputAno)
+                            .addComponent(inputMes))
+                        .addGap(105, 105, 105)
+                        .addComponent(btnSeleccionarFecha)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(comboCompanias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(inputMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarFecha))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblVuelosCompaniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVuelosCompaniaMousePressed
+        if (tblVuelosCompania.getSelectedRow() != -1) {
+            VueloTableModel llegadasTableModel = (VueloTableModel) tblVuelosCompania.getModel();
+            try {
+//                apiTemperaturasMiAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoDestinoEn(tblVuelosCompania.getSelectedRow()));
+//                apiTemperaturasOtroAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoOrigenEn(tblVuelosCompania.getSelectedRow()));
+            } catch (NullPointerException np) {
+                JOptionPane.showMessageDialog(null, "Sin información.");
+            }
+        }
+    }//GEN-LAST:event_tblVuelosCompaniaMousePressed
+
+    private void btnSeleccionarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarFechaActionPerformed
+        int dia = Integer.parseInt(inputDia.getText());
+        int mes = Integer.parseInt(inputMes.getText());
+        int ano = Integer.parseInt(inputAno.getText());
+
+        LocalDate fechaSeleccionada = LocalDate.of(ano, mes, dia);
+
+        actualizarTabla(fechaSeleccionada);
+    }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
+
+    private void comboCompaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompaniasActionPerformed
+        actualizarTabla(LocalDate.now());
+    }//GEN-LAST:event_comboCompaniasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +233,16 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSeleccionarFecha;
+    private javax.swing.JComboBox<String> comboCompanias;
+    private javax.swing.JTextField inputAno;
+    private javax.swing.JTextField inputDia;
+    private javax.swing.JTextField inputMes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblVuelosCompania;
     // End of variables declaration//GEN-END:variables
 }

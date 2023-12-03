@@ -1,16 +1,27 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.VueloDiario;
+import com.mycompany.actividad1.logica.LogicaVueloDiario;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author noeli
  */
 public class CancelacionesVuelosDiarios extends javax.swing.JFrame {
 
+        private LogicaVueloDiario logicaVueloDiario = new LogicaVueloDiario();
+        
     /**
      * Creates new form CancelacionesVuelosDiarios
      */
     public CancelacionesVuelosDiarios() {
         initComponents();
+        
+        List<VueloDiario> vuelosDiarios = logicaVueloDiario.getListaVueloDiario();
+
+        comboVueloDiario.setModel(new DefaultComboBoxModel(vuelosDiarios.toArray()));
     }
 
     /**
@@ -22,21 +33,59 @@ public class CancelacionesVuelosDiarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        btnBorrar = new javax.swing.JButton();
+        comboVueloDiario = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel3.setText("Seleccione un vuelo diario:");
+
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+
+        comboVueloDiario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboVueloDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBorrar)
+                        .addGap(8, 8, 8)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(comboVueloDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(btnBorrar)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        logicaVueloDiario.borrarVueloDiario(((VueloDiario) comboVueloDiario.getSelectedItem()).getCodigoVuelo());
+
+        List<VueloDiario> vueloDiario = logicaVueloDiario.getListaVueloDiario();
+        comboVueloDiario.setModel(new DefaultComboBoxModel(vueloDiario.toArray()));
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +123,8 @@ public class CancelacionesVuelosDiarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JComboBox<String> comboVueloDiario;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

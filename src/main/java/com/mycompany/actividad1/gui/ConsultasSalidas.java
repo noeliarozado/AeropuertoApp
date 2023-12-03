@@ -1,16 +1,46 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Aeropuerto;
+import com.mycompany.actividad1.dto.VueloTableModel;
+import com.mycompany.actividad1.dto.VueloDiario;
+import com.mycompany.actividad1.dto.Vuelo;
+import com.mycompany.actividad1.logica.LogicaAeropuerto;
+import com.mycompany.actividad1.logica.LogicaVueloDiario;
+import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author noeli
  */
 public class ConsultasSalidas extends javax.swing.JFrame {
+    private LogicaVueloDiario logicaVuelosDiarios = new LogicaVueloDiario();
+    private LogicaVuelo logicaVuelos = new LogicaVuelo();
+    private LogicaAeropuerto logicaAeropuerto = new LogicaAeropuerto();
 
     /**
      * Creates new form ConsultasSalidas
      */
     public ConsultasSalidas() {
         initComponents();
+
+        actualizarTabla(LocalDate.now());
+
+        Aeropuerto miAeropuerto = logicaAeropuerto.getAeropuertoActual();
+
+//        apiTemperaturasMiAeropuerto.cambiarCiudad(miAeropuerto.getCodigoMunicipio());
+    }
+
+    private void actualizarTabla(LocalDate fecha) {
+        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarVuelosSalida(fecha);
+
+        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
+
+        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
+
+        tblSalidas.setModel(dataModel);
     }
 
     /**
@@ -22,21 +52,121 @@ public class ConsultasSalidas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JScrollPane = new javax.swing.JScrollPane();
+        tblSalidas = new javax.swing.JTable();
+        inputAno = new javax.swing.JTextField();
+        inputMes = new javax.swing.JTextField();
+        inputDia = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnSeleccionarFecha = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tblSalidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblSalidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblSalidasMousePressed(evt);
+            }
+        });
+        JScrollPane.setViewportView(tblSalidas);
+
+        jLabel1.setText("Año:");
+
+        jLabel2.setText("Mes:");
+
+        jLabel3.setText("Día:");
+
+        btnSeleccionarFecha.setText("Seleccionar fecha");
+        btnSeleccionarFecha.setActionCommand("Seleccionar fecha");
+        btnSeleccionarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarFechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(btnSeleccionarFecha))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputAno, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(inputMes))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(inputMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(28, 28, 28)
+                .addComponent(btnSeleccionarFecha)
+                .addGap(18, 18, 18)
+                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblSalidasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSalidasMousePressed
+        if (tblSalidas.getSelectedRow() != -1) {
+            VueloTableModel llegadasTableModel = (VueloTableModel) tblSalidas.getModel();
+            try {
+//                apiTemperaturasOtroAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoOrigenEn(tblSalidas.getSelectedRow()));
+            } catch (NullPointerException np) {
+                JOptionPane.showMessageDialog(null, "Sin información.");
+            }
+        }
+    }//GEN-LAST:event_tblSalidasMousePressed
+
+    private void btnSeleccionarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarFechaActionPerformed
+        int dia = Integer.parseInt(inputDia.getText());
+        int mes = Integer.parseInt(inputMes.getText());
+        int ano = Integer.parseInt(inputAno.getText());
+
+        LocalDate fechaSeleccionada = LocalDate.of(ano, mes, dia);
+
+        actualizarTabla(fechaSeleccionada);
+    }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +204,14 @@ public class ConsultasSalidas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane;
+    private javax.swing.JButton btnSeleccionarFecha;
+    private javax.swing.JTextField inputAno;
+    private javax.swing.JTextField inputDia;
+    private javax.swing.JTextField inputMes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTable tblSalidas;
     // End of variables declaration//GEN-END:variables
 }
