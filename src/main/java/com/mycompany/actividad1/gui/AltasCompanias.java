@@ -1,16 +1,82 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Compania;
+import com.mycompany.actividad1.logica.LogicaCompania;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author noeli
  */
 public class AltasCompanias extends javax.swing.JFrame {
 
+    private LogicaCompania logicaCompanias = new LogicaCompania();
+
     /**
      * Creates new form AltasCompanias
      */
     public AltasCompanias() {
         initComponents();
+    }
+
+    private boolean validarComponente() {
+        String prefijo = inputPrefijo.getText();
+        if (prefijo == null || "".equals(prefijo)) {
+            JOptionPane.showMessageDialog(this, "El prefijo no puede estar vacío.", "Error en el prefijo.",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (Integer.parseInt(prefijo) <= 0 || Integer.parseInt(prefijo) > 999) {
+            JOptionPane.showMessageDialog(this, "El prefijo tiene que ser un número entre 1 y 999", "Error en el prefijo.",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String codigo = inputCodigo.getText();
+        if (codigo == null || "".equals(codigo)) {
+            JOptionPane.showMessageDialog(this, "El código no puede estar vacío.", "Error en el código.",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!codigo.matches("[A-Z]{2}|[A-Z][0-9]")) {
+            JOptionPane.showMessageDialog(this, "El código no cumple los requisitos.", "Error en el código.",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String direccion = inputDireccion.getText();
+        if (direccion == null || "".equals(direccion)) {
+            JOptionPane.showMessageDialog(this, "La dirección no puede estar vacía.", "Error en la dirección",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String municipio = inputMunicipio.getText();
+        if (municipio == null || "".equals(municipio)) {
+            JOptionPane.showMessageDialog(this, "El municipio no puede estar vacío.", "Error en el municipio.",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String telefonoPasajero = inputTelefonoPasajero.getText();
+        if (telefonoPasajero == null || "".equals(telefonoPasajero)) {
+            JOptionPane.showMessageDialog(this, "El teléfono de información al pasajero no puede estar vacío.", "Error "
+                    + "en el teléfono de informaicón al pasajero.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!telefonoPasajero.matches("\\d{3}\\d{1,12}")) {
+            JOptionPane.showMessageDialog(this, "El teléfono de atención al pasajero no cumple los requisitos.",
+                    "Error en el teléfono de atención al pasajero.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String telefonoAeropuerto = inputTelefonoAeropuerto.getText();
+        if (telefonoAeropuerto == null || "".equals(telefonoAeropuerto)) {
+            JOptionPane.showMessageDialog(this, "El teléfono de atención a aeropuertos no puede estar vacío.",
+                    "Error en el teléfono de atención a aeropuertos.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!telefonoAeropuerto.matches("\\d{3}\\d{1,12}")) {
+            JOptionPane.showMessageDialog(this, "El teléfono de atención a aeropuertos no puede estar vacío.",
+                    "Error en el teléfono de atención a aeropuertos.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -22,21 +88,145 @@ public class AltasCompanias extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        inputPrefijo = new javax.swing.JTextField();
+        inputNombreCompania = new javax.swing.JTextField();
+        inputDireccion = new javax.swing.JTextField();
+        inputMunicipio = new javax.swing.JTextField();
+        inputTelefonoPasajero = new javax.swing.JTextField();
+        inputTelefonoAeropuerto = new javax.swing.JTextField();
+        btnRegistrar = new javax.swing.JButton();
+        inputCodigo = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Prefijo:");
+
+        jLabel3.setText("Código:");
+
+        jLabel4.setText("Nombre de la compañía:");
+
+        jLabel5.setText("Dirección:");
+
+        jLabel6.setText("Municipio:");
+
+        jLabel7.setText("Teléfono de información al pasajero:");
+
+        jLabel8.setText("Teléfono de información a aeropuertos:");
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputTelefonoPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addGap(18, 18, 18)
+                            .addComponent(inputTelefonoAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(inputDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(95, 95, 95)
+                                        .addComponent(inputMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(inputNombreCompania, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inputCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inputPrefijo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegistrar)
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(inputPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(inputNombreCompania, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(inputDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(inputMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(inputTelefonoPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(inputTelefonoAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if (validarComponente()) {
+            int prefijo = Integer.parseInt(inputPrefijo.getText());
+            String codigo = inputCodigo.getText();
+            String nombreCompania = inputNombreCompania.getText();
+            String direccion = inputDireccion.getText();
+            String municipio = inputMunicipio.getText();
+            String telefonoPasajero = inputTelefonoPasajero.getText();
+            String telefonoAeropuerto = inputTelefonoAeropuerto.getText();
+
+            logicaCompanias.anadirCompania(new Compania(prefijo, codigo, nombreCompania, direccion, municipio, telefonoPasajero,
+                    telefonoAeropuerto));
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +264,20 @@ public class AltasCompanias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JTextField inputCodigo;
+    private javax.swing.JTextField inputDireccion;
+    private javax.swing.JTextField inputMunicipio;
+    private javax.swing.JTextField inputNombreCompania;
+    private javax.swing.JTextField inputPrefijo;
+    private javax.swing.JTextField inputTelefonoAeropuerto;
+    private javax.swing.JTextField inputTelefonoPasajero;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

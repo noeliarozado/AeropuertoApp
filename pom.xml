@@ -5,6 +5,26 @@
     <artifactId>Actividad1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
+            <type>jar</type>
+        </dependency>
+        <dependency> 
+            <groupId>org.openjfx</groupId> 
+            <artifactId>javafx-swing</artifactId> 
+            <version>17.0.7</version> 
+            <type>jar</type> 
+        </dependency> 
+        <dependency> 
+            <groupId>org.openjfx</groupId> 
+            <artifactId>javafx-web</artifactId> 
+            <version>17.0.7</version> 
+            <type>jar</type> 
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
