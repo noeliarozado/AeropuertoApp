@@ -1,10 +1,15 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.logica.LogicaVueloDiario;
+import java.time.LocalDate;
+
 /**
  *
  * @author noeli
  */
 public class ConsultasRecaudaciones extends javax.swing.JFrame {
+
+    private LogicaVueloDiario logicaVuelosDiarios = new LogicaVueloDiario();
 
     /**
      * Creates new form ConsultasRecaudaciones
@@ -22,21 +27,98 @@ public class ConsultasRecaudaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        inputano = new javax.swing.JTextField();
+        inoutMes = new javax.swing.JTextField();
+        inputDia = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnCalcularRecaudaciones = new javax.swing.JButton();
+        lblGananciasTotales = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Año:");
+
+        jLabel3.setText("Mes:");
+
+        jLabel4.setText("Día:");
+
+        jLabel5.setText("Recaudación total:");
+
+        btnCalcularRecaudaciones.setText("Calcular recaudaciones");
+        btnCalcularRecaudaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularRecaudacionesActionPerformed(evt);
+            }
+        });
+
+        lblGananciasTotales.setText("- euros");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputano)
+                            .addComponent(inoutMes)
+                            .addComponent(inputDia, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(lblGananciasTotales)))
+                .addContainerGap(165, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCalcularRecaudaciones)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(inputano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(inoutMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(btnCalcularRecaudaciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lblGananciasTotales))
+                .addGap(43, 43, 43))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCalcularRecaudacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularRecaudacionesActionPerformed
+        int dia = Integer.parseInt(inputDia.getText());
+        int mes = Integer.parseInt(inoutMes.getText());
+        int ano = Integer.parseInt(inputano.getText());
+
+        LocalDate fecha = LocalDate.of(ano, mes, dia);
+
+        lblGananciasTotales.setText(logicaVuelosDiarios.recaudacionesDiarias(fecha) + " euros");
+    }//GEN-LAST:event_btnCalcularRecaudacionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +156,14 @@ public class ConsultasRecaudaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcularRecaudaciones;
+    private javax.swing.JTextField inoutMes;
+    private javax.swing.JTextField inputDia;
+    private javax.swing.JTextField inputano;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblGananciasTotales;
     // End of variables declaration//GEN-END:variables
 }

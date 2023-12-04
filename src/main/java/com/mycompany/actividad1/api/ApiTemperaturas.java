@@ -1,16 +1,87 @@
 package com.mycompany.actividad1.api;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mycompany.actividad1.logica.LogicaAeropuerto;
+import java.io.Serializable;
+import org.json.JSONObject;
+
 /**
  *
  * @author noeli
  */
-public class ApiTemperaturas extends javax.swing.JPanel {
+public class ApiTemperaturas extends javax.swing.JPanel implements Serializable {
+
+    private ApiInformacion apiInformacion;
+    private LogicaAeropuerto logicaAeropuerto = new LogicaAeropuerto();
 
     /**
      * Creates new form ApiTemperaturas
      */
     public ApiTemperaturas() {
         initComponents();
+    }
+
+    public ApiInformacion getApiInformacion() {
+        return apiInformacion;
+    }
+
+    public void setApiInformacion(ApiInformacion apiInformacion) {
+        this.apiInformacion = apiInformacion;
+    }
+
+    public ApiTemperaturaCiudad getTemperaturasCiudad(int codigoCiudad) {
+        if (codigoCiudad == 0) {
+            return null;
+        }
+        try {
+            String urlTiempo = String.format("https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/%05d", codigoCiudad);
+            HttpResponse<JsonNode> jsonResponse = Unirest.get(urlTiempo)
+                    .header("accept", "application/json")
+                    .header("api_key", apiInformacion.getApiKey())
+                    .asJson();
+            String dataUrl = jsonResponse
+                    .getBody()
+                    .getObject()
+                    .getString("datos");
+
+            HttpResponse<JsonNode> jsonUrlResponse = Unirest.get(dataUrl)
+                    .header("accept", "application/json")
+                    .asJson();
+            JSONObject temperatures = jsonUrlResponse
+                    .getBody()
+                    .getArray()
+                    .getJSONObject(0)
+                    .getJSONObject("prediccion")
+                    .getJSONArray("dia")
+                    .getJSONObject(0)
+                    .getJSONObject("temperatura");
+            int minima = temperatures.getInt("minima");
+            int maxima = temperatures.getInt("maxima");
+
+            String nombreCiudad = logicaAeropuerto.getAeropuertoPorCodigoMunicipio(codigoCiudad).getNombreCiudad();
+
+            return new ApiTemperaturaCiudad(nombreCiudad, minima, maxima);
+        } catch (UnirestException uex) {
+            System.out.println("Error unirest: " + uex);
+        }
+        return null;
+    }
+
+    public void cambiarCiudad(int codigoCiudad) {
+        apiInformacion.setCodigo(codigoCiudad);
+        if (codigoCiudad == 0) {
+            etiquetaCiudad.setText("-");
+            lblMaxima.setText("-");
+            lblMinima.setText("-");
+        } else {
+            ApiTemperaturaCiudad temperaturaCiudad = getTemperaturasCiudad(apiInformacion.getCodigo());
+            etiquetaCiudad.setText(temperaturaCiudad.getNombreCiudad());
+            lblMaxima.setText(String.valueOf(temperaturaCiudad.getTemperaturaMaxima()));
+            lblMinima.setText(String.valueOf(temperaturaCiudad.getTemperaturaMinima()));
+        }
     }
 
     /**
@@ -28,6 +99,10 @@ public class ApiTemperaturas extends javax.swing.JPanel {
         etiquetaCiudad = new javax.swing.JLabel();
         lblMaxima = new javax.swing.JLabel();
         lblMinima = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 255), 1, true));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Ciudad:");
@@ -44,29 +119,34 @@ public class ApiTemperaturas extends javax.swing.JPanel {
 
         lblMinima.setText("-");
 
+        jLabel4.setText("ºC");
+
+        jLabel5.setText("ºC");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblMaxima))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel3))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblMaxima)
+                            .addComponent(lblMinima))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(etiquetaCiudad))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblMinima)))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(etiquetaCiudad)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,14 +155,18 @@ public class ApiTemperaturas extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(etiquetaCiudad))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblMaxima))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMaxima)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(lblMinima))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMinima)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -93,6 +177,8 @@ public class ApiTemperaturas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblMaxima;
     private javax.swing.JLabel lblMinima;
     // End of variables declaration//GEN-END:variables

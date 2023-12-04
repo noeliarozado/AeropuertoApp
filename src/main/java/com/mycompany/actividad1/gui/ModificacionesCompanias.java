@@ -1,16 +1,107 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Compania;
+import com.mycompany.actividad1.logica.LogicaCompania;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author noeli
  */
 public class ModificacionesCompanias extends javax.swing.JFrame {
 
+    private LogicaCompania logicaCompanias = new LogicaCompania();
+
     /**
      * Creates new form ModificacionesCompanias
      */
     public ModificacionesCompanias() {
         initComponents();
+
+        List<Compania> companias = logicaCompanias.getListaCompanias();
+
+        String[] prefijos = new String[companias.size()];
+
+        int i = 0;
+        for (Compania compania : companias) {
+            prefijos[i] = Integer.toString(compania.getPrefijo());
+            i++;
+        }
+        comboPrefijo.setModel(new DefaultComboBoxModel(prefijos));
+
+        inputPrecargado();
+    }
+
+    private void inputPrecargado() {
+        List<Compania> companias = logicaCompanias.getListaCompanias();
+
+        String prefijoSeleccionado = (String) comboPrefijo.getSelectedItem();
+
+        if (prefijoSeleccionado != null) {
+            int prefijoSeleccionadoInt = Integer.parseInt(prefijoSeleccionado);
+            for (Compania compania : companias) {
+                if (compania.getPrefijo() == prefijoSeleccionadoInt) {
+                    inputCodigo.setText(compania.getCodigo());
+                    inputNombreCompania.setText(compania.getNombreCompania());
+                    inputDireccion.setText(compania.getDireccion());
+                    inputMunicipio.setText(compania.getMunicipio());
+                    inputTelefonoPasajero.setText(compania.getTelefonoPasajero());
+                    inputTelefonoAeropuerto.setText(compania.getTelefonoAeropuerto());
+                    break;
+                }
+            }
+        }
+    }
+
+    private boolean validarComponente() {
+        String codigo = inputCodigo.getText();
+        if (codigo == null || "".equals(codigo)) {
+            JOptionPane.showMessageDialog(this, "El código no puede estar vacío.", "Error en el código",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!codigo.matches("[A-Z]{2}|[A-Z][0-9]")) {
+            JOptionPane.showMessageDialog(this, "El código no cumple los requisitos.", "Error en el código.",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String direccion = inputDireccion.getText();
+        if (direccion == null || "".equals(direccion)) {
+            JOptionPane.showMessageDialog(this, "La dirección no puede estar vacía.", "Error en la dirección",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String municipio = inputMunicipio.getText();
+        if (municipio == null || "".equals(municipio)) {
+            JOptionPane.showMessageDialog(this, "El municipio no puede estar vacío", "Error en el municipio",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String telefonoPasajero = inputTelefonoPasajero.getText();
+        if (telefonoPasajero == null || "".equals(telefonoPasajero)) {
+            JOptionPane.showMessageDialog(this, "El teléfono de información al pasajero no puede estar vacío.",
+                    "Error en el teléfono de atención al pasajero.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!telefonoPasajero.matches("\\d{3}\\d{1,12}")) { // \d es igual a [0-9]
+            JOptionPane.showMessageDialog(this, "El teléfono de atención al pasajero no cumple los requisitos.",
+                    "Error en el teléfono de atención al pasajero.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String airportPhone = inputTelefonoAeropuerto.getText();
+        if (airportPhone == null || "".equals(airportPhone)) {
+            JOptionPane.showMessageDialog(this, "El teléfono de información a aeropuertos no puede estar vacío.",
+                    "Error en el teléfono de información a aeropuertos.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!airportPhone.matches("\\d{3}\\d{1,12}")) {
+            JOptionPane.showMessageDialog(this, "El teléfono de información a aeropuertos no cumple con los requisitos.",
+                    "Error en el teléfono de información a aeropuertos.", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -22,21 +113,169 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        inputCodigo = new javax.swing.JTextField();
+        inputNombreCompania = new javax.swing.JTextField();
+        inputDireccion = new javax.swing.JTextField();
+        inputTelefonoPasajero = new javax.swing.JTextField();
+        inputMunicipio = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        inputTelefonoAeropuerto = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        comboPrefijo = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Introduzca los nuevos datos:");
+
+        jLabel2.setText("Prefijo:");
+
+        jLabel5.setText("Dirección:");
+
+        jLabel7.setText("Teléfono de información al pasajero:");
+
+        jLabel8.setText("Teléfono de información a aeropuertos:");
+
+        jLabel6.setText("Municipio:");
+
+        jLabel4.setText("Nombre de la compañía:");
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Seleecione una compañía:");
+
+        jLabel10.setText("Código:");
+
+        comboPrefijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboPrefijoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                                .addComponent(comboPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(inputDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                    .addComponent(inputCodigo)
+                                    .addComponent(inputNombreCompania)
+                                    .addComponent(inputMunicipio)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addGap(40, 40, 40)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputTelefonoPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                            .addComponent(inputTelefonoAeropuerto))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnModificar)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(comboPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(inputNombreCompania, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(inputDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(inputMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(inputTelefonoPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(inputTelefonoAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnModificar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (validarComponente()) {
+            int prefijo = Integer.parseInt((String) comboPrefijo.getSelectedItem());
+            String código = inputCodigo.getText();
+            String nombreCompania = inputNombreCompania.getText();
+            String direccion = inputDireccion.getText();
+            String municipio = inputMunicipio.getText();
+            String telefonoPasajero = inputTelefonoPasajero.getText();
+            String telefonoAeropuerto = inputTelefonoAeropuerto.getText();
+
+            logicaCompanias.actualizarCompania(new Compania(prefijo, código, nombreCompania, direccion, municipio,
+                    telefonoPasajero, telefonoAeropuerto));
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void comboPrefijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPrefijoActionPerformed
+        inputPrecargado();
+    }//GEN-LAST:event_comboPrefijoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,5 +313,22 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> comboPrefijo;
+    private javax.swing.JTextField inputCodigo;
+    private javax.swing.JTextField inputDireccion;
+    private javax.swing.JTextField inputMunicipio;
+    private javax.swing.JTextField inputNombreCompania;
+    private javax.swing.JTextField inputTelefonoAeropuerto;
+    private javax.swing.JTextField inputTelefonoPasajero;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
