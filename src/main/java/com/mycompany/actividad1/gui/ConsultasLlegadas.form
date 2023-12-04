@@ -42,10 +42,16 @@
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Component id="btnSeleccionarFecha" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="inputMes" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputAno" alignment="0" pref="146" max="32767" attributes="0"/>
-                              <Component id="inputDia" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="inputMes" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputAno" alignment="0" pref="146" max="32767" attributes="0"/>
+                                  <Component id="inputDia" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="apiTemperaturasMiAeropuerto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="apiTemperaturasOtroAeropuerto" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -58,19 +64,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputAno" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputMes" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputDia" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputAno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputDia" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="apiTemperaturasMiAeropuerto" min="-2" max="-2" attributes="0"/>
+                  <Component id="apiTemperaturasOtroAeropuerto" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnSeleccionarFecha" min="-2" max="-2" attributes="0"/>
@@ -134,6 +146,20 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeleccionarFechaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.mycompany.actividad1.api.ApiTemperaturas" name="apiTemperaturasMiAeropuerto">
+      <Properties>
+        <Property name="apiInformacion" type="com.mycompany.actividad1.api.ApiInformacion" editor="com.mycompany.actividad1.api.ApiPropertyEditorSupport">
+          <SerializedValue value="-84,-19,0,5,115,114,0,43,99,111,109,46,109,121,99,111,109,112,97,110,121,46,97,99,116,105,118,105,100,97,100,49,46,97,112,105,46,65,112,105,73,110,102,111,114,109,97,99,105,111,110,61,111,56,93,31,-13,-37,-31,2,0,2,73,0,6,99,111,100,105,103,111,76,0,6,97,112,105,75,101,121,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,120,112,0,0,-128,-8,116,1,32,101,121,74,104,98,71,99,105,79,105,74,73,85,122,73,49,78,105,74,57,46,101,121,74,122,100,87,73,105,79,105,74,118,89,50,86,104,98,109,57,53,100,71,108,108,99,110,74,104,81,71,100,116,89,87,108,115,76,109,78,118,98,83,73,115,73,109,112,48,97,83,73,54,73,106,65,119,78,122,73,50,78,122,90,107,76,84,85,52,90,68,99,116,78,68,103,122,77,67,49,105,79,84,65,53,76,87,77,50,79,71,89,120,78,68,107,120,78,84,81,121,90,67,73,115,73,109,108,122,99,121,73,54,73,107,70,70,84,85,86,85,73,105,119,105,97,87,70,48,73,106,111,120,78,106,107,53,77,106,103,120,78,106,103,52,76,67,74,49,99,50,86,121,83,87,81,105,79,105,73,119,77,68,99,121,78,106,99,50,90,67,48,49,79,71,81,51,76,84,81,52,77,122,65,116,89,106,107,119,79,83,49,106,78,106,104,109,77,84,81,53,77,84,85,48,77,109,81,105,76,67,74,121,98,50,120,108,73,106,111,105,73,110,48,46,114,70,116,67,89,68,83,90,89,56,106,82,99,88,80,116,97,81,80,88,97,66,70,104,68,69,117,98,74,51,116,78,80,51,115,75,120,90,69,115,83,88,48"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.mycompany.actividad1.api.ApiTemperaturas" name="apiTemperaturasOtroAeropuerto">
+      <Properties>
+        <Property name="apiInformacion" type="com.mycompany.actividad1.api.ApiInformacion" editor="com.mycompany.actividad1.api.ApiPropertyEditorSupport">
+          <SerializedValue value="-84,-19,0,5,115,114,0,43,99,111,109,46,109,121,99,111,109,112,97,110,121,46,97,99,116,105,118,105,100,97,100,49,46,97,112,105,46,65,112,105,73,110,102,111,114,109,97,99,105,111,110,61,111,56,93,31,-13,-37,-31,2,0,2,73,0,6,99,111,100,105,103,111,76,0,6,97,112,105,75,101,121,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,120,112,0,0,-128,-8,116,1,32,101,121,74,104,98,71,99,105,79,105,74,73,85,122,73,49,78,105,74,57,46,101,121,74,122,100,87,73,105,79,105,74,118,89,50,86,104,98,109,57,53,100,71,108,108,99,110,74,104,81,71,100,116,89,87,108,115,76,109,78,118,98,83,73,115,73,109,112,48,97,83,73,54,73,106,65,119,78,122,73,50,78,122,90,107,76,84,85,52,90,68,99,116,78,68,103,122,77,67,49,105,79,84,65,53,76,87,77,50,79,71,89,120,78,68,107,120,78,84,81,121,90,67,73,115,73,109,108,122,99,121,73,54,73,107,70,70,84,85,86,85,73,105,119,105,97,87,70,48,73,106,111,120,78,106,107,53,77,106,103,120,78,106,103,52,76,67,74,49,99,50,86,121,83,87,81,105,79,105,73,119,77,68,99,121,78,106,99,50,90,67,48,49,79,71,81,51,76,84,81,52,77,122,65,116,89,106,107,119,79,83,49,106,78,106,104,109,77,84,81,53,77,84,85,48,77,109,81,105,76,67,74,121,98,50,120,108,73,106,111,105,73,110,48,46,114,70,116,67,89,68,83,90,89,56,106,82,99,88,80,116,97,81,80,88,97,66,70,104,68,69,117,98,74,51,116,78,80,51,115,75,120,90,69,115,83,88,48"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

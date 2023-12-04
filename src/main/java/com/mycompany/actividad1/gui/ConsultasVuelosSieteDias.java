@@ -66,6 +66,8 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         comboDestinos = new javax.swing.JComboBox<>();
         jscroll = new javax.swing.JScrollPane();
         tblDestinos = new javax.swing.JTable();
+        apiTemperaturasMiAeropuerto = new com.mycompany.actividad1.api.ApiTemperaturas();
+        apiTemperaturasOtroAeropuerto = new com.mycompany.actividad1.api.ApiTemperaturas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,31 +97,43 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         });
         jscroll.setViewportView(tblDestinos);
 
+        apiTemperaturasMiAeropuerto.setApiInformacion(new com.mycompany.actividad1.api.ApiInformacion(33016, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2Vhbm95dGllcnJhQGdtYWlsLmNvbSIsImp0aSI6IjAwNzI2NzZkLTU4ZDctNDgzMC1iOTA5LWM2OGYxNDkxNTQyZCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjk5MjgxNjg4LCJ1c2VySWQiOiIwMDcyNjc2ZC01OGQ3LTQ4MzAtYjkwOS1jNjhmMTQ5MTU0MmQiLCJyb2xlIjoiIn0.rFtCYDSZY8jRcXPtaQPXaBFhDEubJ3tNP3sKxZEsSX0"));
+
+        apiTemperaturasOtroAeropuerto.setApiInformacion(new com.mycompany.actividad1.api.ApiInformacion(33016, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2Vhbm95dGllcnJhQGdtYWlsLmNvbSIsImp0aSI6IjAwNzI2NzZkLTU4ZDctNDgzMC1iOTA5LWM2OGYxNDkxNTQyZCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjk5MjgxNjg4LCJ1c2VySWQiOiIwMDcyNjc2ZC01OGQ3LTQ4MzAtYjkwOS1jNjhmMTQ5MTU0MmQiLCJyb2xlIjoiIn0.rFtCYDSZY8jRcXPtaQPXaBFhDEubJ3tNP3sKxZEsSX0"));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addComponent(comboDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
-                .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)
+                        .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(comboDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(comboDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -133,8 +147,8 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         if (tblDestinos.getSelectedRow() != -1) {
             VueloTableModel llegadasTableModel = (VueloTableModel) tblDestinos.getModel();
             try {
-//                apiTemperaturasMiAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoDestinoEn(tblDestinos.getSelectedRow()));
-//                apiTemperaturasOtroAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoOrigenEn(tblDestinos.getSelectedRow()));
+                apiTemperaturasMiAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoDestinoEn(tblDestinos.getSelectedRow()));
+                apiTemperaturasOtroAeropuerto.cambiarCiudad(llegadasTableModel.getCodigoOrigenEn(tblDestinos.getSelectedRow()));
             } catch (NullPointerException np) {
                 JOptionPane.showMessageDialog(null, "Sin información.");
             }
@@ -177,6 +191,8 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.mycompany.actividad1.api.ApiTemperaturas apiTemperaturasMiAeropuerto;
+    private com.mycompany.actividad1.api.ApiTemperaturas apiTemperaturasOtroAeropuerto;
     private javax.swing.JComboBox<String> comboDestinos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jscroll;

@@ -19,6 +19,7 @@ import java.util.List;
  * @author noeli
  */
 public class LogicaVueloDiario {
+
     private static final String RUTA_ARCHIVO_CSV = "vuelosDiarios.csv";
     private static final String RUTA_ARCHIVO_SERIALIZADO = "vuelosDiarios.ser";
     private static final String RUTA_ARCHIVO_AEROPUERTO = "codigoAeropuerto.csv";
@@ -56,7 +57,7 @@ public class LogicaVueloDiario {
                 int plazasOcupadas = Integer.parseInt(datos[4]);
                 double preciovuelo = Double.parseDouble(datos[5]);
 
-                VueloDiario vueloDiario = new VueloDiario(codigoVuelo, fecha, horaSalida, horaLlegada, plazasOcupadas, 
+                VueloDiario vueloDiario = new VueloDiario(codigoVuelo, fecha, horaSalida, horaLlegada, plazasOcupadas,
                         preciovuelo);
                 datosCargados.add(vueloDiario);
             }
@@ -250,9 +251,17 @@ public class LogicaVueloDiario {
 
     public double recaudacionesDiarias(LocalDate fecha) {
         double recaudaciones = 0;
-        for (VueloDiario vuelodiario : listaVuelosDiarios) {
-            if (vuelodiario.getFecha().equals(fecha) && vuelodiario.getHoraSalidaReal().isBefore(LocalTime.now())) {
-                recaudaciones += vuelodiario.getPrecio() * vuelodiario.getPlazasOcupadas();
+        for (VueloDiario vueloDiario : listaVuelosDiarios) {
+            boolean fechaBusqueda = vueloDiario.getFecha().equals(fecha);
+            boolean esHoy = vueloDiario.getFecha().equals(LocalDate.now());
+            boolean haSalido = vueloDiario.getHoraSalidaReal().isBefore(LocalTime.now());
+            /*if ((vueloDiario.getFecha().equals(fecha) && vueloDiario.getFecha().equals(LocalDate.now())
+                    && vueloDiario.getHoraSalidaReal().isBefore(LocalTime.now()))
+                    || (vueloDiario.getFecha().equals(fecha) && !vueloDiario.getFecha().equals(LocalDate.now()))) {
+                recaudaciones += vueloDiario.getPrecio() * vueloDiario.getPlazasOcupadas();
+            }*/
+            if (fechaBusqueda && (haSalido || !esHoy)) {
+                recaudaciones += vueloDiario.getPrecio() * vueloDiario.getPlazasOcupadas();
             }
         }
         return recaudaciones;

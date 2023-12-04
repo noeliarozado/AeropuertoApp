@@ -82,4 +82,9 @@ public class Compania implements Serializable {
         this.telefonoAeropuerto = telefonoAeropuerto;
     }
 
+    @Override
+    public String toString() {
+        return nombreCompania;
+    }
+
 }
