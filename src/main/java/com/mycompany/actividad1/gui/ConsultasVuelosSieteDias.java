@@ -31,9 +31,9 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
 
         List<String> destinos = new ArrayList<String>();
 
-        for (Vuelo flight : vuelos) {
-            if (!destinos.contains(flight.getAeropuertoDestino().getCodigoIATA())) {
-                destinos.add(flight.getAeropuertoDestino().getCodigoIATA());
+        for (Vuelo vuelo : vuelos) {
+            if (!destinos.contains(vuelo.getAeropuertoDestino().getCodigoIATA())) {
+                destinos.add(vuelo.getAeropuertoDestino().getCodigoIATA());
             }
 
             comboDestinos.setModel(new DefaultComboBoxModel(destinos.toArray()));
