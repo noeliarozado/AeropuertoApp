@@ -47,9 +47,19 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
 
         btnCancelaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelaciones.setText("Cancelaciones");
+        btnCancelaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelacionesActionPerformed(evt);
+            }
+        });
 
         btnModificaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnModificaciones.setText("Modificaciones");
+        btnModificaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificacionesActionPerformed(evt);
+            }
+        });
 
         btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultas.setText("Consultas");
@@ -126,11 +136,15 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasActionPerformed
-        // TODO add your handling code here:
+        AltasVuelosDiarios altasVuelosDiarios = new AltasVuelosDiarios();
+        altasVuelosDiarios.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAltasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        ConsultasVuelosDiarios consultasVuelosDiarios = new ConsultasVuelosDiarios();
+        consultasVuelosDiarios.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -138,6 +152,18 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
         menuPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnCancelacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelacionesActionPerformed
+        CancelacionesVuelosDiarios cancelacionesVuelosDiarios = new CancelacionesVuelosDiarios();
+        cancelacionesVuelosDiarios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelacionesActionPerformed
+
+    private void btnModificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionesActionPerformed
+        ModificacionesVuelosDiarios modificacionesVuelosDiarios = new ModificacionesVuelosDiarios();
+        modificacionesVuelosDiarios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnModificacionesActionPerformed
 
     /**
      * @param args the command line arguments

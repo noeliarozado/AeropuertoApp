@@ -115,6 +115,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelacionesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnModificaciones">
           <Properties>
@@ -123,6 +126,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Modificaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificacionesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnConsultas">
           <Properties>

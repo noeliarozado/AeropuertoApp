@@ -47,9 +47,19 @@ public class CompaniasPanelCRUD extends javax.swing.JFrame {
 
         btnCancelaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelaciones.setText("Cancelaciones");
+        btnCancelaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelacionesActionPerformed(evt);
+            }
+        });
 
         btnModificaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnModificaciones.setText("Modificaciones");
+        btnModificaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificacionesActionPerformed(evt);
+            }
+        });
 
         btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultas.setText("Consultas");
@@ -126,18 +136,34 @@ public class CompaniasPanelCRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasActionPerformed
-        // TODO add your handling code here:
+        AltasCompanias altasCompanias = new AltasCompanias();
+        altasCompanias.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAltasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        ConsultasCompanias consultasCompanias = new ConsultasCompanias();
+        consultasCompanias.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.setVisible(true);
-        this.dispose(); 
+        this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnCancelacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelacionesActionPerformed
+        CancelacionesCompanias cancelacionesCompanias = new CancelacionesCompanias();
+        cancelacionesCompanias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelacionesActionPerformed
+
+    private void btnModificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionesActionPerformed
+        ModificacionesCompanias modificacionesCompanias = new ModificacionesCompanias();
+        modificacionesCompanias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnModificacionesActionPerformed
 
     /**
      * @param args the command line arguments
