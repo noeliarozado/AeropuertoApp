@@ -4,6 +4,7 @@ import com.mycompany.actividad1.dto.VueloDiario;
 import com.mycompany.actividad1.logica.LogicaVueloDiario;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,11 +37,6 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
         String fecha = inputFecha.getText();
         if (fecha == null || "".equals(fecha)) {
             JOptionPane.showMessageDialog(this, "La fecha del vuelo no puede estar vacía.", "Error en la fecha del vuelo.",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!fecha.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
-            JOptionPane.showMessageDialog(this, "La fecha del vuelo no cumple los requisitos.", "Error en la fecha del vuelo",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -103,7 +99,6 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        inputFecha = new javax.swing.JTextField();
         inputHoraSalida = new javax.swing.JTextField();
         inputHoraLlegada = new javax.swing.JTextField();
         inputPrecioVuelo = new javax.swing.JTextField();
@@ -113,6 +108,7 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         inputCodigo = new javax.swing.JTextField();
+        inputFecha = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,40 +132,46 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
         jLabel10.setText("Fecha del vuelo:");
         jLabel10.setToolTipText("");
 
+        try {
+            inputFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel2)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel7)))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(inputFecha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputHoraSalida, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputHoraLlegada, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputPlazasOcupadas, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputPrecioVuelo))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel6)
+                .addContainerGap(499, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnRegistrar)
                 .addGap(102, 102, 102))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel7)))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(inputHoraSalida, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(inputHoraLlegada, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(inputPlazasOcupadas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(inputPrecioVuelo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,8 +210,9 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (validarComponente()) {
+            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/M/yyyy");
             String codigoVuelo = inputCodigo.getText();
-            LocalDate fecha = LocalDate.parse(inputFecha.getText());
+            LocalDate fecha = LocalDate.parse(inputFecha.getText(), formatterDate);
             LocalTime horaSalida = LocalTime.parse(inputHoraSalida.getText());
             LocalTime horaLlegada = LocalTime.parse(inputHoraLlegada.getText());
             int plazasOcupadas = Integer.parseInt(inputPlazasOcupadas.getText());
@@ -259,7 +262,7 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JTextField inputCodigo;
-    private javax.swing.JTextField inputFecha;
+    private javax.swing.JFormattedTextField inputFecha;
     private javax.swing.JTextField inputHoraLlegada;
     private javax.swing.JTextField inputHoraSalida;
     private javax.swing.JTextField inputPlazasOcupadas;
