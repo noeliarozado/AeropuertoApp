@@ -104,7 +104,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         comboCompania = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jMenuBar = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         menuAyuda = new javax.swing.JMenu();
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
@@ -128,6 +128,11 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         });
 
         comboCompania.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboCompania.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCompaniaActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Seleccione una compañía:");
@@ -190,9 +195,9 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         });
         menuAyuda.add(menuAyudaPrincipal);
 
-        jMenuBar.add(menuAyuda);
+        menuBar.add(menuAyuda);
 
-        setJMenuBar(jMenuBar);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,6 +229,10 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         menuPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void comboCompaniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompaniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCompaniaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,9 +275,9 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboCompania;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuItem menuAyudaPrincipal;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }
