@@ -2,8 +2,14 @@ package com.mycompany.actividad1.gui;
 
 import com.mycompany.actividad1.dto.Vuelo;
 import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.awt.Font;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -22,8 +28,8 @@ public class ConsultasVuelos extends javax.swing.JFrame {
         List<Vuelo> vuelos = logicaVuelo.getListaVuelos();
 
         Object[][] datos = new Object[vuelos.size()][];
-        String[] titulos = {"Código de vuelo", "Aeropuerto origen", "Aeropuerto destinp", "Número de plazas",
-            "Hora oficial de salida", "Hora oficial de llegada", "Días"};
+        String[] titulos = {"Código vuelo", "Aeropuerto origen", "Aeropuerto destino", "Nº plazas",
+            "Hora salida", "Hora llegada", "Días"};
 
         int i = 0;
         for (Vuelo vuelo : vuelos) {
@@ -36,7 +42,53 @@ public class ConsultasVuelos extends javax.swing.JFrame {
 
         DefaultTableModel dataModel = new DefaultTableModel(datos, titulos);
 
-        flightsTable.setModel(dataModel);
+        tblVuelos.setModel(dataModel);
+
+        JTableHeader encabezado = tblVuelos.getTableHeader();
+
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) encabezado.getDefaultRenderer();
+        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        encabezado.setFont(new Font("Segoe UI", Font.BOLD, 13));
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        int[] columnasCentradas = {0, 1, 2, 3, 4, 5, 6};
+
+        for (int columnIndex : columnasCentradas) {
+            tblVuelos.getColumnModel().getColumn(columnIndex).setCellRenderer(centerRenderer);
+        }
+
+        TableColumnModel columnModel = tblVuelos.getColumnModel();
+
+        int indiceColumnaCodigo = 0;
+        TableColumn columnaCodigo = columnModel.getColumn(indiceColumnaCodigo);
+        columnaCodigo.setPreferredWidth(80);
+
+        int indiceColumnaAeropuertoOrigen = 1;
+        TableColumn columnaAeropuertoOrigen = columnModel.getColumn(indiceColumnaAeropuertoOrigen);
+        columnaAeropuertoOrigen.setPreferredWidth(120);
+
+        int indiceColumnaAeropuertoDestino = 2;
+        TableColumn columnaAeropuertoDestino = columnModel.getColumn(indiceColumnaAeropuertoDestino);
+        columnaAeropuertoDestino.setPreferredWidth(120);
+
+        int indiceColumnaPlazas = 3;
+        TableColumn columnaPlazas = columnModel.getColumn(indiceColumnaPlazas);
+        columnaPlazas.setPreferredWidth(60);
+
+        int indiceColumnaHoraSalida = 4;
+        TableColumn columnaHoraSalida = columnModel.getColumn(indiceColumnaHoraSalida);
+        columnaHoraSalida.setPreferredWidth(80);
+
+        int indiceColumnaHoraLlegada = 5;
+        TableColumn columnaHoraLlegada = columnModel.getColumn(indiceColumnaHoraLlegada);
+        columnaHoraLlegada.setPreferredWidth(80);
+
+        int indiceColumnaDias = 6;
+        TableColumn columnaDias = columnModel.getColumn(indiceColumnaDias);
+        columnaDias.setPreferredWidth(40);
     }
 
     /**
@@ -48,12 +100,17 @@ public class ConsultasVuelos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        flightsTable = new javax.swing.JTable();
+        tblVuelos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        flightsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel1.setBackground(new java.awt.Color(214, 240, 248));
+
+        tblVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -61,27 +118,67 @@ public class ConsultasVuelos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
         ));
-        jScrollPane1.setViewportView(flightsTable);
+        jScrollPane1.setViewportView(tblVuelos);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel2.setText("CONSULTA DE VUELOS");
+
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(235, 235, 235))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnMenu)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMenu)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,7 +216,10 @@ public class ConsultasVuelos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable flightsTable;
+    private javax.swing.JButton btnMenu;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblVuelos;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,11 +27,11 @@ import javax.swing.KeyStroke;
  * @author noeli
  */
 public class CancelacionesCompanias extends javax.swing.JFrame {
+
     private LogicaCompania logicaCompania = new LogicaCompania();
     private JFXPanel fxPanel;
     private JFrame frame;
     private Map<JComponent, String> contextualHelpMap;
-
 
     /**
      * Creates new form CancelacionesCompanias
@@ -39,18 +39,18 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
     public CancelacionesCompanias() {
         initComponents();
         comboCompania.setBackground(Color.WHITE);
-        
+        btnBorrar.setBackground(new Color(186, 213, 255));
+
         setHelp();
 
         List<Compania> companias = logicaCompania.getListaCompanias();
 
         comboCompania.setModel(new DefaultComboBoxModel(companias.toArray()));
-               
+
         // Incluir método toString() en la clase Compania
     }
 
-    
-     private void setHelp() {
+    private void setHelp() {
         fxPanel = new JFXPanel();
         frame = new JFrame("Ayuda");
         frame.setSize(new Dimension(500, 500));
@@ -88,7 +88,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
             frame.setVisible(true);
         });
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,6 +113,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
@@ -177,7 +178,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
                             .addComponent(comboCompania, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(53, 53, 53)
                 .addComponent(btnBorrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(btnMenu)
                 .addGap(21, 21, 21))
         );

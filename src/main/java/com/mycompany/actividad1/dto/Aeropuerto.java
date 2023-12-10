@@ -39,4 +39,21 @@ public class Aeropuerto {
         this.codigoMunicipio = codigoMunicipio;
     }
 
+    @Override
+    public String toString() {
+        return codigoIATA;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

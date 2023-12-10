@@ -1,5 +1,7 @@
 package com.mycompany.actividad1.gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author noeli
@@ -11,6 +13,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        btnGestionCompanias.setBackground(new Color(186, 213, 255));
+        btnGestionVuelos.setBackground(new Color(186, 213, 255));
     }
 
     /**
@@ -105,13 +109,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestionCompaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionCompaniasActionPerformed
-        CompaniasPanelCRUD companiasPanel = new CompaniasPanelCRUD(); 
+        CompaniasPanelCRUD companiasPanel = new CompaniasPanelCRUD();
         companiasPanel.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGestionCompaniasActionPerformed
 
     private void btnGestionVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionVuelosActionPerformed
-        VuelosMenu vuelosMenu = new VuelosMenu(); 
+        VuelosMenu vuelosMenu = new VuelosMenu();
         vuelosMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGestionVuelosActionPerformed

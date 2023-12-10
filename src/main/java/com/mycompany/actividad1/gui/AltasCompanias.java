@@ -1,7 +1,7 @@
 package com.mycompany.actividad1.gui;
 
-import com.mycompany.actividad1.dto.Compania;
 import com.mycompany.actividad1.logica.LogicaCompania;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +17,7 @@ public class AltasCompanias extends javax.swing.JFrame {
      */
     public AltasCompanias() {
         initComponents();
+        btnRegistrar.setBackground(new Color(186, 213, 255));
     }
 
     private boolean validarComponente() {
@@ -112,6 +113,7 @@ public class AltasCompanias extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
@@ -173,7 +175,7 @@ public class AltasCompanias extends javax.swing.JFrame {
                                 .addComponent(inputTelefonoPasajero))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addComponent(inputMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)

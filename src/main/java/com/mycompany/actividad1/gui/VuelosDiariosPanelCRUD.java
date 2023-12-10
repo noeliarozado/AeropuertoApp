@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.actividad1.gui;
+
+import java.awt.Color;
 
 /**
  *
@@ -15,6 +13,10 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
      */
     public VuelosDiariosPanelCRUD() {
         initComponents();
+        btnAltas.setBackground(new Color(186, 213, 255));
+        btnCancelaciones.setBackground(new Color(186, 213, 255));
+        btnModificaciones.setBackground(new Color(186, 213, 255));
+        btnConsultas.setBackground(new Color(186, 213, 255));
     }
 
     /**
@@ -70,6 +72,7 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
         });
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);

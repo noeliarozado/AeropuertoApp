@@ -4,6 +4,9 @@ import com.mycompany.actividad1.dto.Aeropuerto;
 import com.mycompany.actividad1.dto.Vuelo;
 import com.mycompany.actividad1.logica.LogicaAeropuerto;
 import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.awt.Color;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,64 +23,18 @@ public class AltasVuelos extends javax.swing.JFrame {
      */
     public AltasVuelos() {
         initComponents();
+        btnRegistrar.setBackground(new Color(186, 213, 255));
+
+        List<Aeropuerto> aeropuertos = logicaAeropuerto.getListaAeropuerto();
+
+        comboAeropuertoOrigen.setModel(new DefaultComboBoxModel(aeropuertos.toArray()));
+        comboAeropuertoDestino.setModel(new DefaultComboBoxModel(aeropuertos.toArray()));
+
+        comboAeropuertoOrigen.setBackground(Color.WHITE);
+        comboAeropuertoDestino.setBackground(Color.WHITE);
     }
 
     private boolean validarcomponente() {
-        String aeropuertoOrigen = inputAeropuertoOrigen.getText();
-        if (aeropuertoOrigen == null || "".equals(aeropuertoOrigen)) {
-            JOptionPane.showMessageDialog(this, "El aeropuerto origen no puede estar vacío.", "Error en el aeripuerto "
-                    + "origen.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!aeropuertoOrigen.matches("[A-Z]{3}")) {
-            JOptionPane.showMessageDialog(this, "El aeropuerto origen no cumple los requisitos.", "Error en el aeropuerto "
-                    + "origen.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        String aeropuertoDestino = inputAeropuertoDestino.getText();
-        if (aeropuertoDestino == null || "".equals(aeropuertoDestino)) {
-            JOptionPane.showMessageDialog(this, "El aeropuerto destino no puede estar vacío.", "Error en el aeropuerto destino.",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!aeropuertoDestino.matches("[A-Z]{3}")) {
-            JOptionPane.showMessageDialog(this, "El aeropuerto destino no cumple los requisitos.", "Error en el aeropuerto destino.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        int numeroPlazas = Integer.parseInt(inputPlazas.getText());
-        if (numeroPlazas == 0 || "".equals(numeroPlazas)) {
-            JOptionPane.showMessageDialog(this, "El número de plazas no puede estar vacío.", "Error en el número de plazas.",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (numeroPlazas <= 0 || numeroPlazas > 853) {
-            JOptionPane.showMessageDialog(this, "El número de plazas no cumple los requisitos.", "Error en el número de plazas.",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        String horaSalida = inputHoraSalida.getText();
-        if (horaSalida == null || "".equals(horaSalida)) {
-            JOptionPane.showMessageDialog(this, "La hora oficial de salida no puede estar vacía.", "Error en la hora oficial "
-                    + "de salida.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!horaSalida.matches("[0-9]{2}:[0-9]{2}")) {
-            JOptionPane.showMessageDialog(this, "La hora oficial de salida no cumple los requisitos.", "Error en la hora "
-                    + "oficial de salida.",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        String horaLlegada = inputHoraLlegada.getText();
-        if (horaLlegada == null || "".equals(horaLlegada)) {
-            JOptionPane.showMessageDialog(this, "La hora oficial de llegada no puede estar vacía.", "Error en la hora "
-                    + "oficial de llegada.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!horaLlegada.matches("[0-9]{2}:[0-9]{2}")) {
-            JOptionPane.showMessageDialog(this, "La hora oficial de llegada no cumple los requisitos.", "Error en la hora "
-                    + "oficial de llegada.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
         String dias = inputDias.getText();
         if (dias == null || "".equals(dias)) {
             JOptionPane.showMessageDialog(this, "Los días que opera no pueden estar vacíos.", "Error en los días que opera.",
@@ -101,142 +58,201 @@ public class AltasVuelos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         inputCodigo = new javax.swing.JTextField();
-        inputAeropuertoOrigen = new javax.swing.JTextField();
-        inputAeropuertoDestino = new javax.swing.JTextField();
-        inputPlazas = new javax.swing.JTextField();
-        inputHoraSalida = new javax.swing.JTextField();
-        inputHoraLlegada = new javax.swing.JTextField();
         inputDias = new javax.swing.JTextField();
-        btnRegister = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        inputHoraSalida = new javax.swing.JFormattedTextField();
+        inputHoraLlegada = new javax.swing.JFormattedTextField();
+        btnMenu = new javax.swing.JButton();
+        comboAeropuertoOrigen = new javax.swing.JComboBox<>();
+        comboAeropuertoDestino = new javax.swing.JComboBox<>();
+        spinnerPlazas = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Días que opera:");
+        jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
-        jLabel2.setText("Hora oficial de llegada:");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Código de vuelo:");
 
-        jLabel3.setText("Hora oficial de salida:");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Aeropuerto origen:");
 
-        jLabel4.setText("Número de plazas:");
-
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Aeropuerto destino:");
         jLabel5.setToolTipText("");
 
-        jLabel6.setText("Aeropuerto origen:");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Número de plazas:");
 
-        jLabel7.setText("Código de vuelo:");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Hora oficial de salida:");
 
-        btnRegister.setText("Registrar");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Hora oficial de llegada:");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Días que opera:");
+
+        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel8.setText("ALTA DE VUELOS");
+
+        try {
+            inputHoraSalida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            inputHoraLlegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        spinnerPlazas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 583, 1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(inputCodigo)
+                                    .addComponent(jLabel8)
+                                    .addComponent(comboAeropuertoOrigen, 0, 288, Short.MAX_VALUE))))
+                        .addGap(0, 141, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRegistrar)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(comboAeropuertoDestino, 0, 289, Short.MAX_VALUE)
+                                .addComponent(inputDias)
+                                .addComponent(inputHoraSalida)
+                                .addComponent(inputHoraLlegada)
+                                .addComponent(spinnerPlazas)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMenu)))
+                .addGap(35, 35, 35))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel8)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(comboAeropuertoOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(comboAeropuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(inputHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(inputHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(inputDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(btnMenu)
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnRegistrar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(84, 84, 84)
-                        .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegister)
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(74, 74, 74)
-                                .addComponent(inputAeropuertoOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputAeropuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(inputHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel1))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(53, 53, 53)
-                                            .addComponent(inputHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(inputDias, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(2, 2, 2))))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(inputAeropuertoOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(inputAeropuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(inputPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(inputHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(inputHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(inputDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegister))
-                .addGap(13, 13, 13))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (validarcomponente()) {
             String codigoVuelo = (String) inputCodigo.getText();
-            Aeropuerto aeropuertoOrigen = logicaAeropuerto.getAeropuertoPorCodigoIATA(inputAeropuertoOrigen.getText());
-            Aeropuerto aeropuertoDestino = logicaAeropuerto.getAeropuertoPorCodigoIATA(inputAeropuertoDestino.getText());
-            int numeroPlazas = Integer.parseInt(inputPlazas.getText());
+            Aeropuerto aeropuertoOrigen = (Aeropuerto) comboAeropuertoOrigen.getSelectedItem();
+            Aeropuerto aeropuertoDestino = (Aeropuerto) comboAeropuertoDestino.getSelectedItem();
+            int numeroPlazas = (int) spinnerPlazas.getValue();
             String horaSalida = inputHoraSalida.getText();
             String horaLlegada = inputHoraLlegada.getText();
             String dias = inputDias.getText();
             logicaVuelo.anadirVuelo(new Vuelo(codigoVuelo, aeropuertoOrigen, aeropuertoDestino, numeroPlazas,
                     horaSalida, horaLlegada, dias));
         }
-    }//GEN-LAST:event_btnRegisterActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,14 +290,14 @@ public class AltasVuelos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegister;
-    private javax.swing.JTextField inputAeropuertoDestino;
-    private javax.swing.JTextField inputAeropuertoOrigen;
+    private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> comboAeropuertoDestino;
+    private javax.swing.JComboBox<String> comboAeropuertoOrigen;
     private javax.swing.JTextField inputCodigo;
     private javax.swing.JTextField inputDias;
-    private javax.swing.JTextField inputHoraLlegada;
-    private javax.swing.JTextField inputHoraSalida;
-    private javax.swing.JTextField inputPlazas;
+    private javax.swing.JFormattedTextField inputHoraLlegada;
+    private javax.swing.JFormattedTextField inputHoraSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -289,5 +305,8 @@ public class AltasVuelos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner spinnerPlazas;
     // End of variables declaration//GEN-END:variables
 }

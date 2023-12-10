@@ -1,5 +1,7 @@
 package com.mycompany.actividad1.gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author noeli
@@ -11,6 +13,11 @@ public class ConsultasVuelosDiarios extends javax.swing.JFrame {
      */
     public ConsultasVuelosDiarios() {
         initComponents();
+        btnPanelSalidas.setBackground(new Color(186, 213, 255));
+        btnPanelLlegadas.setBackground(new Color(186, 213, 255));
+        btnVuelosCompaniaFecha.setBackground(new Color(186, 213, 255));
+        btnRecaudaciones.setBackground(new Color(186, 213, 255));
+        btnVuelosDestino.setBackground(new Color(186, 213, 255));
     }
 
     /**
@@ -67,6 +74,7 @@ public class ConsultasVuelosDiarios extends javax.swing.JFrame {
         });
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
@@ -92,7 +100,7 @@ public class ConsultasVuelosDiarios extends javax.swing.JFrame {
                     .addComponent(btnPanelSalidas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPanelLlegadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVuelosDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVuelosCompaniaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
+                    .addComponent(btnVuelosCompaniaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
                 .addGap(39, 39, 39)
                 .addComponent(btnMenu)
                 .addGap(24, 24, 24))

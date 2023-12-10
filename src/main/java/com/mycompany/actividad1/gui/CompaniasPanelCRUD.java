@@ -4,6 +4,8 @@
  */
 package com.mycompany.actividad1.gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author noeli
@@ -15,6 +17,10 @@ public class CompaniasPanelCRUD extends javax.swing.JFrame {
      */
     public CompaniasPanelCRUD() {
         initComponents();
+        btnAltas.setBackground(new Color(186, 213, 255));
+        btnCancelaciones.setBackground(new Color(186, 213, 255));
+        btnModificaciones.setBackground(new Color(186, 213, 255));
+        btnConsultas.setBackground(new Color(186, 213, 255));
     }
 
     /**
@@ -70,6 +76,7 @@ public class CompaniasPanelCRUD extends javax.swing.JFrame {
         });
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);

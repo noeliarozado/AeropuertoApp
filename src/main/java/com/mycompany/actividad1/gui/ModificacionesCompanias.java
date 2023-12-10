@@ -21,6 +21,7 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
     public ModificacionesCompanias() {
         initComponents();
         comboPrefijo.setBackground(Color.WHITE);
+        btnModificar.setBackground(new Color(186, 213, 255));
 
         List<Compania> companias = logicaCompanias.getListaCompanias();
 
@@ -186,6 +187,7 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         jLabel3.setText("MODIFICACIÓN DE COMPAÑÍAS");
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
@@ -205,7 +207,7 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(454, 566, Short.MAX_VALUE)
+                                .addGap(454, 570, Short.MAX_VALUE)
                                 .addComponent(btnMenu))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -274,7 +276,6 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(inputMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
