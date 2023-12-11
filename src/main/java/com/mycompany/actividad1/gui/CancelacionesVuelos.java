@@ -19,12 +19,11 @@ public class CancelacionesVuelos extends javax.swing.JFrame {
      */
     public CancelacionesVuelos() {
         initComponents();
+        
         comboVuelos.setBackground(Color.WHITE);
-
         btnBorrar.setBackground(new Color(186, 213, 255));
 
         List<Vuelo> vuelos = logicaVuelo.getListaVuelos();
-
         comboVuelos.setModel(new DefaultComboBoxModel(vuelos.toArray()));
     }
 

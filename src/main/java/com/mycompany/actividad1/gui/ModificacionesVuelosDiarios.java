@@ -2,8 +2,10 @@ package com.mycompany.actividad1.gui;
 
 import com.mycompany.actividad1.dto.VueloDiario;
 import com.mycompany.actividad1.logica.LogicaVueloDiario;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -14,15 +16,18 @@ import javax.swing.JOptionPane;
  */
 public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
 
-        private LogicaVueloDiario logicaVueloDiario = new LogicaVueloDiario();
-        
+    private LogicaVueloDiario logicaVueloDiario = new LogicaVueloDiario();
+
     /**
-     * Creates new form ModificacionesVuelosDiarios
+     * Creates new form ModificacionesV
      */
     public ModificacionesVuelosDiarios() {
         initComponents();
-        
-           List<VueloDiario> vuelosDiarios = logicaVueloDiario.getListaVueloDiario();
+
+        comboCodigo.setBackground(Color.WHITE);
+        btnModificar.setBackground(new Color(186, 213, 255));
+
+        List<VueloDiario> vuelosDiarios = logicaVueloDiario.getListaVueloDiario();
 
         String[] codigosVuelo = new String[vuelosDiarios.size()];
         int i = 0;
@@ -35,8 +40,7 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
         inputPrecargado();
     }
 
-    
-      private void inputPrecargado() {
+    private void inputPrecargado() {
         List<VueloDiario> vuelosDiarios = logicaVueloDiario.getListaVueloDiario();
 
         String codigoSeleccionado = (String) comboCodigo.getSelectedItem();
@@ -47,7 +51,7 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
                     inputFecha.setText(vueloDiario.getFecha().toString());
                     inputHoraSalida.setText(vueloDiario.getHoraSalidaReal().toString());
                     inputHoraLlegada.setText(vueloDiario.getHoraLlegadaReal().toString());
-                    inputPlazasOcupadas.setText(String.valueOf(vueloDiario.getPlazasOcupadas()));
+                    inputPlazas.setText(String.valueOf(vueloDiario.getPlazasOcupadas()));
                     inputPrecioAsiento.setText(String.valueOf(vueloDiario.getPrecio()));
                     break;
                 }
@@ -58,51 +62,25 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
     private boolean validarComponente() {
         String fecha = inputFecha.getText();
         if (fecha == null || "".equals(fecha)) {
-            JOptionPane.showMessageDialog(this, "La fecha del vuelo no puede estar vacía.", 
+            JOptionPane.showMessageDialog(this, "La fecha del vuelo no puede estar vacía.",
                     "Error en la fecha.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!fecha.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
-            JOptionPane.showMessageDialog(this, "La fecha no cumple los requisitos.", "Error en la fecha.", 
-                    JOptionPane.ERROR_MESSAGE);
             return false;
         }
         String horaSalida = inputHoraSalida.getText();
         if (horaSalida == null || "".equals(horaSalida)) {
-            JOptionPane.showMessageDialog(this, "La hora de salida no puede estar vacía.", "Error en la hora de salida.", 
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!horaSalida.matches("[0-9]{2}:[0-9]{2}")) {
-            JOptionPane.showMessageDialog(this, "La hora de salida no cumple los requisitos.", "Error en la hora de salida.", 
+            JOptionPane.showMessageDialog(this, "La hora de salida no puede estar vacía.", "Error en la hora de salida.",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
         String horaLlegada = inputHoraLlegada.getText();
         if (horaLlegada == null || "".equals(horaLlegada)) {
-            JOptionPane.showMessageDialog(this, "La hora de llegada no puede estar vacía.", "Error en la hora de llegada.", 
+            JOptionPane.showMessageDialog(this, "La hora de llegada no puede estar vacía.", "Error en la hora de llegada.",
                     JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (!horaLlegada.matches("[0-9]{2}:[0-9]{2}")) {
-            JOptionPane.showMessageDialog(this, "La hora de llegada no cumple los requisitos.", "Error en la hora de llegada.", 
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        int plazasOcupadas = Integer.parseInt(inputPlazasOcupadas.getText());
-        if ("".equals(plazasOcupadas)) {
-            JOptionPane.showMessageDialog(this, "El número de plazas ocupadas no puede estar vacío.", "Error en el número "
-                    + "de plazas ocupadas.", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (plazasOcupadas <= 0 || plazasOcupadas > 853) {
-            JOptionPane.showMessageDialog(this, "El número de plazas ocupadas no cumple los requisitos.", "Error en "
-                    + "el número de plazas ocupadas.", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         double precioVuelo = Double.parseDouble(inputPrecioAsiento.getText());
         if ("".equals(precioVuelo)) {
-            JOptionPane.showMessageDialog(this, "El precio del vuelo no puede estar vacío.", "Error en el precio del vuelo.", 
+            JOptionPane.showMessageDialog(this, "El precio del vuelo no puede estar vacío.", "Error en el precio del vuelo.",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -113,7 +91,7 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,46 +101,34 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        inputFecha = new javax.swing.JTextField();
-        inputHoraSalida = new javax.swing.JTextField();
-        inputHoraLlegada = new javax.swing.JTextField();
-        inputPrecioAsiento = new javax.swing.JTextField();
-        inputPlazasOcupadas = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnModificar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         comboCodigo = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        inputPrecioAsiento = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        inputHoraSalida = new javax.swing.JFormattedTextField();
+        inputHoraLlegada = new javax.swing.JFormattedTextField();
+        inputFecha = new javax.swing.JTextField();
+        inputPlazas = new javax.swing.JTextField();
+        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nuevos datos:");
+        jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Vuelo a diario a modificar:");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Código de vuelo:");
-
-        jLabel5.setText("Hora de llegada real:");
-
-        jLabel7.setText("Precio del vuelo:");
-
-        jLabel6.setText("Número de plazas ocupadas:");
-
-        jLabel4.setText("Hora de salida real:");
-
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Seleccione un vuelo:");
-
-        jLabel10.setText("Fecha:");
 
         comboCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,110 +136,179 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(comboCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(inputPlazasOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(inputHoraSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(inputHoraLlegada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(inputFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(inputPrecioAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 7, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificar)))
-                .addContainerGap())
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Datos del nuevo vuelo diario:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setText("Fecha:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Hora de salida real:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Hora de llegada real:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Número de plazas ocupadas:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Precio del vuelo:");
+
+        btnModificar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel8.setText("MODIFICACIÓN DE VUELOS DIARIOS");
+
+        try {
+            inputHoraSalida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            inputHoraLlegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(jLabel8)
+                .addContainerGap(172, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnModificar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel2))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboCodigo, 0, 221, Short.MAX_VALUE)
+                            .addComponent(inputHoraSalida)
+                            .addComponent(inputHoraLlegada)
+                            .addComponent(inputPrecioAsiento)
+                            .addComponent(inputFecha)
+                            .addComponent(inputPlazas))))
+                .addGap(53, 53, 53)
+                .addComponent(btnMenu)
+                .addGap(47, 47, 47))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(73, 73, 73)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(comboCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(inputHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(inputHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(inputHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(inputHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(inputPlazasOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(inputPrecioAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addComponent(btnModificar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(inputPrecioAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(inputPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 47, Short.MAX_VALUE)))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnModificar)
+                    .addComponent(btnMenu))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        if (validarComponente()) {
-            String codigoVuelo = (String) comboCodigo.getSelectedItem();
-            LocalDate fecha = LocalDate.parse(inputFecha.getText());
-            LocalTime horaSalida = LocalTime.parse(inputHoraSalida.getText());
-            LocalTime horaLlegada = LocalTime.parse(inputHoraLlegada.getText());
-            int plazasOcupadas = Integer.parseInt(inputPlazasOcupadas.getText());
-            double precioVuelo = Double.parseDouble(inputPrecioAsiento.getText());
-
-            logicaVueloDiario.actualizarVueloDiario(new VueloDiario(codigoVuelo, fecha, horaSalida, horaLlegada,
-                plazasOcupadas, precioVuelo));
-        }
-    }//GEN-LAST:event_btnModificarActionPerformed
-
     private void comboCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCodigoActionPerformed
         inputPrecargado();
     }//GEN-LAST:event_comboCodigoActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (validarComponente()) {
+            String codigoVuelo = (String) comboCodigo.getSelectedItem();
+
+//            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/M/yyyy");
+//            LocalDate fecha = LocalDate.parse(inputFecha.getText(), formatterDate);
+            LocalDate fecha = LocalDate.parse(inputFecha.getText());
+
+            LocalTime horaSalida = LocalTime.parse(inputHoraSalida.getText());
+            LocalTime horaLlegada = LocalTime.parse(inputHoraLlegada.getText());
+            int plazasOcupadas = Integer.parseInt(inputPlazas.getText());
+            double precioVuelo = Double.parseDouble(inputPrecioAsiento.getText());
+
+            logicaVueloDiario.actualizarVueloDiario(new VueloDiario(codigoVuelo, fecha, horaSalida, horaLlegada,
+                    plazasOcupadas, precioVuelo));
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +336,7 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ModificacionesVuelosDiarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -311,12 +347,13 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> comboCodigo;
     private javax.swing.JTextField inputFecha;
-    private javax.swing.JTextField inputHoraLlegada;
-    private javax.swing.JTextField inputHoraSalida;
-    private javax.swing.JTextField inputPlazasOcupadas;
+    private javax.swing.JFormattedTextField inputHoraLlegada;
+    private javax.swing.JFormattedTextField inputHoraSalida;
+    private javax.swing.JTextField inputPlazas;
     private javax.swing.JTextField inputPrecioAsiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -325,6 +362,8 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -145,7 +145,9 @@ public class VuelosPanelCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAltasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        ConsultasVuelos consultasVuelos = new ConsultasVuelos();
+        consultasVuelos.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -161,8 +163,8 @@ public class VuelosPanelCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelacionesActionPerformed
 
     private void btnModificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionesActionPerformed
-        ConsultasCompanias consultasCompanias = new ConsultasCompanias();
-        consultasCompanias.setVisible(true);
+        ModificacionesVuelos modificacionesVuelos = new ModificacionesVuelos();
+        modificacionesVuelos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnModificacionesActionPerformed
 

@@ -1,5 +1,6 @@
 package com.mycompany.actividad1.gui;
 
+import com.mycompany.actividad1.dto.Compania;
 import com.mycompany.actividad1.logica.LogicaCompania;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -144,6 +145,11 @@ public class AltasCompanias extends javax.swing.JFrame {
 
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Prefijo:");
@@ -257,12 +263,27 @@ public class AltasCompanias extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if (validarComponente()) {
+            int prefijo = Integer.parseInt(inputPrefijo.getText());
+            String codigo = inputCodigo.getText();
+            String nombreCompania = inputNombreCompania.getText();
+            String direccion = inputDireccion.getText();
+            String municipio = inputMunicipio.getText();
+            String telefonoPasajero = inputTelefonoPasajero.getText();
+            String telefonoAeropuerto = inputTelefonoAeropuerto.getText();
+
+            logicaCompanias.anadirCompania(new Compania(prefijo, codigo, nombreCompania, direccion, municipio, telefonoPasajero,
+                    telefonoAeropuerto));
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting codigo (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
