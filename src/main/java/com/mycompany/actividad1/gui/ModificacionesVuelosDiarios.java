@@ -48,7 +48,7 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
         if (codigoSeleccionado != null) {
             for (VueloDiario vueloDiario : vuelosDiarios) {
                 if (vueloDiario.getCodigoVuelo().equals(codigoSeleccionado)) {
-                    inputFecha.setText(vueloDiario.getFecha().toString());
+                    inputFecha.setText(vueloDiario.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                     inputHoraSalida.setText(vueloDiario.getHoraSalidaReal().toString());
                     inputHoraLlegada.setText(vueloDiario.getHoraLlegadaReal().toString());
                     inputPlazas.setText(String.valueOf(vueloDiario.getPlazasOcupadas()));
@@ -289,11 +289,8 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         if (validarComponente()) {
             String codigoVuelo = (String) comboCodigo.getSelectedItem();
-
-//            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/M/yyyy");
-//            LocalDate fecha = LocalDate.parse(inputFecha.getText(), formatterDate);
-            LocalDate fecha = LocalDate.parse(inputFecha.getText());
-
+            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/M/yyyy");
+            LocalDate fecha = LocalDate.parse(inputFecha.getText(), formatterDate);
             LocalTime horaSalida = LocalTime.parse(inputHoraSalida.getText());
             LocalTime horaLlegada = LocalTime.parse(inputHoraLlegada.getText());
             int plazasOcupadas = Integer.parseInt(inputPlazas.getText());

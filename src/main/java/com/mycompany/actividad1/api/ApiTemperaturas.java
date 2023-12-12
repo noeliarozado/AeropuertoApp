@@ -102,7 +102,8 @@ public class ApiTemperaturas extends javax.swing.JPanel implements Serializable 
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 255), 1, true));
+        setBackground(new java.awt.Color(245, 227, 250));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(215, 140, 250), 2, true));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Ciudad:");
@@ -113,6 +114,7 @@ public class ApiTemperaturas extends javax.swing.JPanel implements Serializable 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("T. mín:");
 
+        etiquetaCiudad.setBackground(new java.awt.Color(245, 227, 250));
         etiquetaCiudad.setText("-");
 
         lblMaxima.setText("-");
@@ -146,7 +148,7 @@ public class ApiTemperaturas extends javax.swing.JPanel implements Serializable 
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(etiquetaCiudad)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

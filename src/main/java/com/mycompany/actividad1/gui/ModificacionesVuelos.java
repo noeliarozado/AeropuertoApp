@@ -40,9 +40,9 @@ public class ModificacionesVuelos extends javax.swing.JFrame {
         comboVueloModificar.setModel(new DefaultComboBoxModel(codigosVuelo));
 
         List<Aeropuerto> aeropuertos = logicaAeropuerto.getListaAeropuerto();
-        String[] codigosAeropuerto = new String[aeropuertos.size()];
+        Aeropuerto[] codigosAeropuerto = new Aeropuerto[aeropuertos.size()];
         for (int j = 0; j < aeropuertos.size(); j++) {
-            codigosAeropuerto[j] = aeropuertos.get(j).getCodigoIATA();
+            codigosAeropuerto[j] = aeropuertos.get(j);
         }
         comboAeropuertoOrigen.setModel(new DefaultComboBoxModel(codigosAeropuerto));
         comboAeropuertoDestino.setModel(new DefaultComboBoxModel(codigosAeropuerto));
@@ -58,8 +58,8 @@ public class ModificacionesVuelos extends javax.swing.JFrame {
         if (codigoSeleccionado != null) {
             for (Vuelo vuelo : vuelos) {
                 if (vuelo.getCodigoVuelo().equals(codigoSeleccionado)) {
-                    comboAeropuertoOrigen.setSelectedItem(vuelo.getAeropuertoOrigen().getCodigoIATA());
-                    comboAeropuertoDestino.setSelectedItem(vuelo.getAeropuertoDestino().getCodigoIATA());
+                    comboAeropuertoOrigen.setSelectedItem(vuelo.getAeropuertoOrigen());
+                    comboAeropuertoDestino.setSelectedItem(vuelo.getAeropuertoDestino());
                     spinnerPlazas.setValue(vuelo.getNumeroPlazas());
                     inputHoraSalida.setText(vuelo.getHoraOficialSalida());
                     inputHoraLlegada.setText(String.valueOf(vuelo.getHoraOficialLlegada()));

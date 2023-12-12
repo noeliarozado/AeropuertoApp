@@ -258,7 +258,11 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (validarComponente()) {
             DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/M/yyyy");
-            String codigoVuelo = (String) comboVueloDiario.getSelectedItem();
+//            String codigoVuelo = (String) comboVueloDiario.getSelectedItem();
+            Vuelo selectedVuelo = (Vuelo) comboVueloDiario.getSelectedItem();
+String codigoVuelo = selectedVuelo.getCodigoVuelo();
+            
+            
             LocalDate fecha = LocalDate.parse(inputFecha.getText(), formatterDate);
             LocalTime horaSalida = LocalTime.parse(inputHoraSalida.getText());
             LocalTime horaLlegada = LocalTime.parse(inputHoraLlegada.getText());

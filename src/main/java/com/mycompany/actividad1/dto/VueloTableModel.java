@@ -1,5 +1,6 @@
 package com.mycompany.actividad1.dto;
 
+import java.time.format.DateTimeFormatter;
 import javax.swing.table.*;
 import java.util.*;
 
@@ -12,7 +13,7 @@ public final class VueloTableModel extends AbstractTableModel {
     List<VueloDiario> vuelosDiarios;
     List<Vuelo> listaVuelo;
 
-    String[] titulos = {"Codigo vuelo", "Fecha", "Hora de salida", "Hora de llegada", "Aeropuerto origen", 
+    String[] titulos = {"Codigo vuelo", "Fecha", "Hora de salida", "Hora de llegada", "Aeropuerto origen",
         "Aeropuerto destino"};
 
     public VueloTableModel(List<VueloDiario> vuelosDiarios, List<Vuelo> listaVuelo) {
@@ -38,7 +39,7 @@ public final class VueloTableModel extends AbstractTableModel {
                 return vuelosDiarios.get(fila).getCodigoVuelo();
             }
             case 1 -> {
-                return vuelosDiarios.get(fila).getFecha();
+                return vuelosDiarios.get(fila).getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             }
             case 2 -> {
                 return vuelosDiarios.get(fila).getHoraSalidaReal();

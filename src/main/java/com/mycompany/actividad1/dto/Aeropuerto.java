@@ -1,5 +1,7 @@
 package com.mycompany.actividad1.dto;
 
+import java.util.Objects;
+
 /**
  *
  * @author noeli
@@ -44,16 +46,26 @@ public class Aeropuerto {
         return codigoIATA;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.codigoIATA);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Aeropuerto other = (Aeropuerto) obj;
+        return Objects.equals(this.codigoIATA, other.codigoIATA);
+    }
     
 }
