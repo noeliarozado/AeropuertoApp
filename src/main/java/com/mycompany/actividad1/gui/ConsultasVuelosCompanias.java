@@ -59,7 +59,22 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
         headerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         encabezado.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        
+             formatearTabla();
+    }
 
+    private void actualizarTabla(LocalDate date) {
+        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.mostrarDiasCompania((String) comboCompanias.getSelectedItem(),
+                date);
+
+        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
+
+        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
+
+        tblVuelosCompania.setModel(dataModel);
+    }
+
+    private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
@@ -94,17 +109,6 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
         int indiceColumnaAeropuertoDestino = 5;
         TableColumn columnaAeropuertoDestino = columnModel.getColumn(indiceColumnaAeropuertoDestino);
         columnaAeropuertoDestino.setPreferredWidth(120);
-    }
-
-    private void actualizarTabla(LocalDate date) {
-        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.mostrarDiasCompania((String) comboCompanias.getSelectedItem(),
-                date);
-
-        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
-
-        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
-
-        tblVuelosCompania.setModel(dataModel);
     }
 
     /**
@@ -205,26 +209,24 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboCompanias, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSeleccionarFecha))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(32, 32, 32)
+                    .addComponent(comboCompanias, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarFecha))
+                .addGap(32, 47, Short.MAX_VALUE)
                 .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnMenu)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(222, 222, 222)
+                            .addComponent(jLabel7))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,10 +286,14 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
         LocalDate fechaSeleccionada = LocalDate.parse(inputFecha.getText(), formatterDate);
 
         actualizarTabla(fechaSeleccionada);
+        
+             formatearTabla();
     }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
 
     private void comboCompaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompaniasActionPerformed
         actualizarTabla(LocalDate.now());
+        
+             formatearTabla();
     }//GEN-LAST:event_comboCompaniasActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
