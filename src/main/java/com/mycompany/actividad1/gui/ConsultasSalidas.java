@@ -35,28 +35,38 @@ public class ConsultasSalidas extends javax.swing.JFrame {
     public ConsultasSalidas() {
         initComponents();
         btnSeleccionarFecha.setBackground(new Color(186, 213, 255));
-        
+
         actualizarTabla(LocalDate.now());
 
         Aeropuerto miAeropuerto = logicaAeropuerto.getAeropuertoActual();
 
         apiTemperaturasMiAeropuerto.cambiarCiudad(miAeropuerto.getCodigoMunicipio());
-        
-        
-        
-        
-         JTableHeader encabezado = tblSalidas.getTableHeader();
+
+        JTableHeader encabezado = tblSalidas.getTableHeader();
 
         DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) encabezado.getDefaultRenderer();
         headerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         encabezado.setFont(new Font("Segoe UI", Font.BOLD, 13));
 
+        formatearTabla();
+    }
+
+    private void actualizarTabla(LocalDate fecha) {
+        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarVuelosSalida(fecha);
+
+        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
+
+        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
+
+        tblSalidas.setModel(dataModel);
+    }
+
+    private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        
-        
-          int[] columnasCentradas = {0, 1, 2, 3, 4, 5};
+
+        int[] columnasCentradas = {0, 1, 2, 3, 4, 5};
 
         for (int columnIndex : columnasCentradas) {
             tblSalidas.getColumnModel().getColumn(columnIndex).setCellRenderer(centerRenderer);
@@ -70,40 +80,23 @@ public class ConsultasSalidas extends javax.swing.JFrame {
 
         int indiceColumnaFecha = 1;
         TableColumn columnaFecha = columnModel.getColumn(indiceColumnaFecha);
-        columnaFecha.setPreferredWidth(120);
+        columnaFecha.setPreferredWidth(60);
 
         int indiceColumnaHoraSalida = 2;
         TableColumn columnaHoraSalida = columnModel.getColumn(indiceColumnaHoraSalida);
-        columnaHoraSalida.setPreferredWidth(120);
+        columnaHoraSalida.setPreferredWidth(90);
 
         int indiceColumnaHoraLlegada = 3;
         TableColumn columnaHoraLlegada = columnModel.getColumn(indiceColumnaHoraLlegada);
-        columnaHoraLlegada.setPreferredWidth(60);
+        columnaHoraLlegada.setPreferredWidth(90);
 
         int indiceColumnaAeropuertoOrigen = 4;
         TableColumn columnaAeropuertoOrigen = columnModel.getColumn(indiceColumnaAeropuertoOrigen);
-        columnaAeropuertoOrigen.setPreferredWidth(80);
+        columnaAeropuertoOrigen.setPreferredWidth(120);
 
         int indiceColumnaAeropuertoDestino = 5;
         TableColumn columnaAeropuertoDestino = columnModel.getColumn(indiceColumnaAeropuertoDestino);
-        columnaAeropuertoDestino.setPreferredWidth(80);
-
-
-        
-        
-        
-        
-        
-    }
-
-    private void actualizarTabla(LocalDate fecha) {
-        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarVuelosSalida(fecha);
-
-        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
-
-        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
-
-        tblSalidas.setModel(dataModel);
+        columnaAeropuertoDestino.setPreferredWidth(120);
     }
 
     /**
@@ -124,6 +117,7 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         tblSalidas = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         btnMenu = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,9 +130,9 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        inputFecha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        inputFecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btnSeleccionarFecha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnSeleccionarFecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSeleccionarFecha.setText("Seleccionar fecha");
         btnSeleccionarFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,50 +166,63 @@ public class ConsultasSalidas extends javax.swing.JFrame {
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
         btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Escriba una fecha:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnMenu)
                     .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(261, 261, 261)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
                 .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSeleccionarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(inputFecha)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel7)))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnSeleccionarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inputFecha)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSeleccionarFecha))
+                            .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSeleccionarFecha)))
-                .addGap(29, 29, 29)
-                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnMenu)
+                        .addComponent(btnMenu))
+                    .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(201, 201, 201))
         );
 
@@ -227,7 +234,7 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -250,7 +257,15 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         LocalDate fechaSeleccionada = LocalDate.parse(inputFecha.getText(), formatterDate);
 
         actualizarTabla(fechaSeleccionada);
+        
+        formatearTabla();
     }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,8 +309,10 @@ public class ConsultasSalidas extends javax.swing.JFrame {
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnSeleccionarFecha;
     private javax.swing.JFormattedTextField inputFecha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTable tblSalidas;
     // End of variables declaration//GEN-END:variables
+
 }

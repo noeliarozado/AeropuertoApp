@@ -7,10 +7,17 @@ import com.mycompany.actividad1.dto.Vuelo;
 import com.mycompany.actividad1.logica.LogicaAeropuerto;
 import com.mycompany.actividad1.logica.LogicaVueloDiario;
 import com.mycompany.actividad1.logica.LogicaVuelo;
+import java.awt.Color;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -27,12 +34,22 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
      */
     public ConsultasLlegadas() {
         initComponents();
+        btnSeleccionarFecha.setBackground(new Color(186, 213, 255));
 
         actualizarTabla(LocalDate.now());
 
         Aeropuerto miAeropuerto = logicaAeropuerto.getAeropuertoActual();
 
         apiTemperaturasMiAeropuerto.cambiarCiudad(miAeropuerto.getCodigoMunicipio());
+
+        JTableHeader encabezado = tblLlegadas.getTableHeader();
+
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) encabezado.getDefaultRenderer();
+        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        encabezado.setFont(new Font("Segoe UI", Font.BOLD, 13));
+
+        formatearTabla();
     }
 
     private void actualizarTabla(LocalDate date) {
@@ -45,6 +62,43 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         tblLlegadas.setModel(dataModel);
     }
 
+    private void formatearTabla() {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        int[] columnasCentradas = {0, 1, 2, 3, 4, 5};
+
+        for (int columnIndex : columnasCentradas) {
+            tblLlegadas.getColumnModel().getColumn(columnIndex).setCellRenderer(centerRenderer);
+        }
+
+        TableColumnModel columnModel = tblLlegadas.getColumnModel();
+
+        int indiceColumnaCodigo = 0;
+        TableColumn columnaCodigo = columnModel.getColumn(indiceColumnaCodigo);
+        columnaCodigo.setPreferredWidth(80);
+
+        int indiceColumnaFecha = 1;
+        TableColumn columnaFecha = columnModel.getColumn(indiceColumnaFecha);
+        columnaFecha.setPreferredWidth(60);
+
+        int indiceColumnaHoraSalida = 2;
+        TableColumn columnaHoraSalida = columnModel.getColumn(indiceColumnaHoraSalida);
+        columnaHoraSalida.setPreferredWidth(90);
+
+        int indiceColumnaHoraLlegada = 3;
+        TableColumn columnaHoraLlegada = columnModel.getColumn(indiceColumnaHoraLlegada);
+        columnaHoraLlegada.setPreferredWidth(90);
+
+        int indiceColumnaAeropuertoOrigen = 4;
+        TableColumn columnaAeropuertoOrigen = columnModel.getColumn(indiceColumnaAeropuertoOrigen);
+        columnaAeropuertoOrigen.setPreferredWidth(120);
+
+        int indiceColumnaAeropuertoDestino = 5;
+        TableColumn columnaAeropuertoDestino = columnModel.getColumn(indiceColumnaAeropuertoDestino);
+        columnaAeropuertoDestino.setPreferredWidth(120);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,14 +108,39 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JScrollPane = new javax.swing.JScrollPane();
-        tblLlegadas = new javax.swing.JTable();
-        btnSeleccionarFecha = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         apiTemperaturasMiAeropuerto = new com.mycompany.actividad1.api.ApiTemperaturas();
         apiTemperaturasOtroAeropuerto = new com.mycompany.actividad1.api.ApiTemperaturas();
+        btnSeleccionarFecha = new javax.swing.JButton();
         inputFecha = new javax.swing.JFormattedTextField();
+        JScrollPane = new javax.swing.JScrollPane();
+        tblLlegadas = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        btnMenu = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(214, 240, 248));
+
+        apiTemperaturasMiAeropuerto.setApiInformacion(new com.mycompany.actividad1.api.ApiInformacion(33044, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2Vhbm95dGllcnJhQGdtYWlsLmNvbSIsImp0aSI6IjAwNzI2NzZkLTU4ZDctNDgzMC1iOTA5LWM2OGYxNDkxNTQyZCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjk5MjgxNjg4LCJ1c2VySWQiOiIwMDcyNjc2ZC01OGQ3LTQ4MzAtYjkwOS1jNjhmMTQ5MTU0MmQiLCJyb2xlIjoiIn0.rFtCYDSZY8jRcXPtaQPXaBFhDEubJ3tNP3sKxZEsSX0"));
+
+        apiTemperaturasOtroAeropuerto.setApiInformacion(new com.mycompany.actividad1.api.ApiInformacion(33044, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2Vhbm95dGllcnJhQGdtYWlsLmNvbSIsImp0aSI6IjAwNzI2NzZkLTU4ZDctNDgzMC1iOTA5LWM2OGYxNDkxNTQyZCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjk5MjgxNjg4LCJ1c2VySWQiOiIwMDcyNjc2ZC01OGQ3LTQ4MzAtYjkwOS1jNjhmMTQ5MTU0MmQiLCJyb2xlIjoiIn0.rFtCYDSZY8jRcXPtaQPXaBFhDEubJ3tNP3sKxZEsSX0"));
+
+        btnSeleccionarFecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSeleccionarFecha.setText("Seleccionar fecha");
+        btnSeleccionarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarFechaActionPerformed(evt);
+            }
+        });
+
+        try {
+            inputFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        inputFecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         tblLlegadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,62 +160,87 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         });
         JScrollPane.setViewportView(tblLlegadas);
 
-        btnSeleccionarFecha.setText("Seleccionar fecha");
-        btnSeleccionarFecha.addActionListener(new java.awt.event.ActionListener() {
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel7.setText("PANEL DE LLEGADAS");
+
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homepage.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarFechaActionPerformed(evt);
+                btnMenuActionPerformed(evt);
             }
         });
 
-        apiTemperaturasMiAeropuerto.setApiInformacion(new com.mycompany.actividad1.api.ApiInformacion(33044, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2Vhbm95dGllcnJhQGdtYWlsLmNvbSIsImp0aSI6IjAwNzI2NzZkLTU4ZDctNDgzMC1iOTA5LWM2OGYxNDkxNTQyZCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjk5MjgxNjg4LCJ1c2VySWQiOiIwMDcyNjc2ZC01OGQ3LTQ4MzAtYjkwOS1jNjhmMTQ5MTU0MmQiLCJyb2xlIjoiIn0.rFtCYDSZY8jRcXPtaQPXaBFhDEubJ3tNP3sKxZEsSX0"));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Escriba una fecha:");
 
-        apiTemperaturasOtroAeropuerto.setApiInformacion(new com.mycompany.actividad1.api.ApiInformacion(33044, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvY2Vhbm95dGllcnJhQGdtYWlsLmNvbSIsImp0aSI6IjAwNzI2NzZkLTU4ZDctNDgzMC1iOTA5LWM2OGYxNDkxNTQyZCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjk5MjgxNjg4LCJ1c2VySWQiOiIwMDcyNjc2ZC01OGQ3LTQ4MzAtYjkwOS1jNjhmMTQ5MTU0MmQiLCJyb2xlIjoiIn0.rFtCYDSZY8jRcXPtaQPXaBFhDEubJ3tNP3sKxZEsSX0"));
-
-        try {
-            inputFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(btnSeleccionarFecha))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnMenu)
+                            .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(246, 246, 246))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSeleccionarFecha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)))
+                        .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMenu))
+                    .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(btnSeleccionarFecha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inputFecha)
-                        .addGap(122, 122, 122))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(188, 188, 188)
-                                .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(6, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(apiTemperaturasMiAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apiTemperaturasOtroAeropuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSeleccionarFecha)
-                    .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -159,7 +263,15 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         LocalDate selectedDate = LocalDate.parse(inputFecha.getText(), formatterDate);
 
         actualizarTabla(selectedDate);
+        
+        formatearTabla();
     }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,8 +312,13 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
     private javax.swing.JScrollPane JScrollPane;
     private com.mycompany.actividad1.api.ApiTemperaturas apiTemperaturasMiAeropuerto;
     private com.mycompany.actividad1.api.ApiTemperaturas apiTemperaturasOtroAeropuerto;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnSeleccionarFecha;
     private javax.swing.JFormattedTextField inputFecha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTable tblLlegadas;
     // End of variables declaration//GEN-END:variables
+
 }
