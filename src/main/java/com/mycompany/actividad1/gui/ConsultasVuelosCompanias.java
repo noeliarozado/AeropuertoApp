@@ -351,4 +351,5 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblVuelosCompania;
     // End of variables declaration//GEN-END:variables
+
 }
