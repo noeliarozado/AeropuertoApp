@@ -133,6 +133,7 @@ public class LogicaVueloDiario {
     public void actualizarVueloDiario(VueloDiario vueloDiarioActualizado) {
         for (VueloDiario vueloDiario : listaVuelosDiarios) {
             if (vueloDiario.getCodigoVuelo().equals(vueloDiarioActualizado.getCodigoVuelo())) {
+                vueloDiario.setFecha(vueloDiarioActualizado.getFecha());
                 vueloDiario.setHoraSalidaReal(vueloDiarioActualizado.getHoraSalidaReal());
                 vueloDiario.setHoraLlegadaReal(vueloDiarioActualizado.getHoraLlegadaReal());
                 vueloDiario.setPlazasOcupadas(vueloDiarioActualizado.getPlazasOcupadas());

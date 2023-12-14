@@ -8,12 +8,14 @@ import com.mycompany.actividad1.logica.LogicaAeropuerto;
 import com.mycompany.actividad1.logica.LogicaVueloDiario;
 import com.mycompany.actividad1.logica.LogicaVuelo;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
@@ -44,10 +46,20 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
 
         JTableHeader encabezado = tblLlegadas.getTableHeader();
 
-        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) encabezado.getDefaultRenderer();
-        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                    int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-        encabezado.setFont(new Font("Segoe UI", Font.BOLD, 13));
+                c.setBackground(new Color(210, 230, 255));
+                setHorizontalAlignment(JLabel.CENTER);
+                setFont(new Font("Segoe UI", Font.BOLD, 13));
+                return c;
+            }
+        };
+
+        encabezado.setDefaultRenderer(headerRenderer);
 
         formatearTabla();
     }
@@ -263,7 +275,7 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         LocalDate selectedDate = LocalDate.parse(inputFecha.getText(), formatterDate);
 
         actualizarTabla(selectedDate);
-        
+
         formatearTabla();
     }//GEN-LAST:event_btnSeleccionarFechaActionPerformed
 
