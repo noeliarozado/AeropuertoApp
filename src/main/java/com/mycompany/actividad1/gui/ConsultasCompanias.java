@@ -40,7 +40,7 @@ public class ConsultasCompanias extends javax.swing.JFrame {
             datos[i] = fila;
             i++;
         }
-        
+
         DefaultTableModel dataModel = new DefaultTableModel(datos, titulos);
 
         tblCompanias.setModel(dataModel);
