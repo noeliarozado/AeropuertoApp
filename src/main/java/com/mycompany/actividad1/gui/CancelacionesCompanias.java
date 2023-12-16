@@ -32,7 +32,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
     private JFXPanel fxPanel;
     private JFrame frame;
     private Map<JComponent, String> contextualHelpMap;
-
+ 
     /**
      * Creates new form CancelacionesCompanias
      */
@@ -47,7 +47,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
 
         comboCompania.setModel(new DefaultComboBoxModel(companias.toArray()));
 
-        // Incluir método toString() en la clase Compania
+        // Incluir método toString() en la clase Compania   
     }
 
     private void setHelp() {
@@ -109,6 +109,7 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
