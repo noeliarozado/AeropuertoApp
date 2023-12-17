@@ -99,6 +99,7 @@ public class VuelosPanelCRUD extends javax.swing.JFrame {
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 

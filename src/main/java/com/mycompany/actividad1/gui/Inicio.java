@@ -1,5 +1,7 @@
 package com.mycompany.actividad1.gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author noeli
@@ -11,6 +13,8 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+
+        btnIniciar.setBackground(new Color(186, 213, 255));
     }
 
     /**
@@ -28,6 +32,7 @@ public class Inicio extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(189, 230, 243));
 

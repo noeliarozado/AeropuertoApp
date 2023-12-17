@@ -33,6 +33,7 @@ public class AltasVuelos extends javax.swing.JFrame {
 
     private LogicaVuelo logicaVuelo = new LogicaVuelo();
     private LogicaAeropuerto logicaAeropuerto = new LogicaAeropuerto();
+
     private JFXPanel fxPanel;
     private JFrame frame;
     private Map<JComponent, String> contextualHelpMap;
@@ -42,15 +43,14 @@ public class AltasVuelos extends javax.swing.JFrame {
      */
     public AltasVuelos() {
         initComponents();
+
         btnRegistrar.setBackground(new Color(186, 213, 255));
-
-        List<Aeropuerto> aeropuertos = logicaAeropuerto.getListaAeropuerto();
-
-        comboAeropuertoOrigen.setModel(new DefaultComboBoxModel(aeropuertos.toArray()));
-        comboAeropuertoDestino.setModel(new DefaultComboBoxModel(aeropuertos.toArray()));
-
         comboAeropuertoOrigen.setBackground(Color.WHITE);
         comboAeropuertoDestino.setBackground(Color.WHITE);
+
+        List<Aeropuerto> aeropuertos = logicaAeropuerto.getListaAeropuerto();
+        comboAeropuertoOrigen.setModel(new DefaultComboBoxModel(aeropuertos.toArray()));
+        comboAeropuertoDestino.setModel(new DefaultComboBoxModel(aeropuertos.toArray()));
 
         setHelp();
     }
@@ -64,7 +64,6 @@ public class AltasVuelos extends javax.swing.JFrame {
         contextualHelpMap = new HashMap<>();
         contextualHelpMap.put(comboAeropuertoOrigen, "https://noelia-2.gitbook.io/ayuda4/ayuda4/combo-aeropuerto-origen");
         contextualHelpMap.put(comboAeropuertoDestino, "https://noelia-2.gitbook.io/ayuda4/ayuda4/combo-aeropuerto-destino");
-        contextualHelpMap.put(spinnerPlazas, "https://noelia-2.gitbook.io/ayuda4/ayuda4/spinner-numero-de-plazas");
         contextualHelpMap.put(btnRegistrar, "https://noelia-2.gitbook.io/ayuda4/ayuda4/control-registrar");
 
         setContextualHelp(contextualHelpMap);
@@ -138,11 +137,13 @@ public class AltasVuelos extends javax.swing.JFrame {
         comboAeropuertoOrigen = new javax.swing.JComboBox<>();
         comboAeropuertoDestino = new javax.swing.JComboBox<>();
         spinnerPlazas = new javax.swing.JSpinner();
+        btnVolver = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuAyuda = new javax.swing.JMenu();
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
@@ -202,12 +203,22 @@ public class AltasVuelos extends javax.swing.JFrame {
 
         spinnerPlazas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 583, 1));
 
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaatras.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(19, 19, 19)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,14 +286,16 @@ public class AltasVuelos extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(inputDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(btnMenu)
-                        .addGap(31, 31, 31))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(btnRegistrar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMenu))
+                        .addGap(31, 31, 31))))
         );
 
         menuAyuda.setText("Ayuda");
@@ -325,6 +338,7 @@ public class AltasVuelos extends javax.swing.JFrame {
             String horaSalida = inputHoraSalida.getText();
             String horaLlegada = inputHoraLlegada.getText();
             String dias = inputDias.getText();
+            
             logicaVuelo.anadirVuelo(new Vuelo(codigoVuelo, aeropuertoOrigen, aeropuertoDestino, numeroPlazas,
                     horaSalida, horaLlegada, dias));
         }
@@ -339,6 +353,12 @@ public class AltasVuelos extends javax.swing.JFrame {
     private void menuAyudaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaPrincipalActionPerformed
         openWebView("https://noelia-2.gitbook.io/ayuda4/");
     }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VuelosPanelCRUD vuelosPanelCRUD = new VuelosPanelCRUD();
+        vuelosPanelCRUD.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +398,7 @@ public class AltasVuelos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> comboAeropuertoDestino;
     private javax.swing.JComboBox<String> comboAeropuertoOrigen;
     private javax.swing.JTextField inputCodigo;

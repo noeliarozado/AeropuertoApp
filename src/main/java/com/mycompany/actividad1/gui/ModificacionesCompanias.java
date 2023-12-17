@@ -39,6 +39,7 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
      */
     public ModificacionesCompanias() {
         initComponents();
+
         comboPrefijo.setBackground(Color.WHITE);
         btnModificar.setBackground(new Color(186, 213, 255));
 
@@ -56,6 +57,27 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         inputPrecargado();
 
         setHelp();
+    }
+
+    private void inputPrecargado() {
+        List<Compania> companias = logicaCompanias.getListaCompanias();
+
+        String prefijoSeleccionado = (String) comboPrefijo.getSelectedItem();
+
+        if (prefijoSeleccionado != null) {
+            int prefijoSeleccionadoInt = Integer.parseInt(prefijoSeleccionado);
+            for (Compania compania : companias) {
+                if (compania.getPrefijo() == prefijoSeleccionadoInt) {
+                    inputCodigo.setText(compania.getCodigo());
+                    inputNombreCompania.setText(compania.getNombreCompania());
+                    inputDireccion.setText(compania.getDireccion());
+                    inputMunicipio.setText(compania.getMunicipio());
+                    inputTelefonoPasajero.setText(compania.getTelefonoPasajero());
+                    inputTelefonoAeropuerto.setText(compania.getTelefonoAeropuerto());
+                    break;
+                }
+            }
+        }
     }
 
     private void setHelp() {
@@ -96,27 +118,6 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         });
     }
 
-    private void inputPrecargado() {
-        List<Compania> companias = logicaCompanias.getListaCompanias();
-
-        String prefijoSeleccionado = (String) comboPrefijo.getSelectedItem();
-
-        if (prefijoSeleccionado != null) {
-            int prefijoSeleccionadoInt = Integer.parseInt(prefijoSeleccionado);
-            for (Compania compania : companias) {
-                if (compania.getPrefijo() == prefijoSeleccionadoInt) {
-                    inputCodigo.setText(compania.getCodigo());
-                    inputNombreCompania.setText(compania.getNombreCompania());
-                    inputDireccion.setText(compania.getDireccion());
-                    inputMunicipio.setText(compania.getMunicipio());
-                    inputTelefonoPasajero.setText(compania.getTelefonoPasajero());
-                    inputTelefonoAeropuerto.setText(compania.getTelefonoAeropuerto());
-                    break;
-                }
-            }
-        }
-    }
-
     private boolean validarComponente() {
         String codigo = inputCodigo.getText();
         if (codigo == null || "".equals(codigo)) {
@@ -152,13 +153,13 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
                     "Error en el teléfono de atención al pasajero.", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        String airportPhone = inputTelefonoAeropuerto.getText();
-        if (airportPhone == null || "".equals(airportPhone)) {
+        String telefonoAeropuerto = inputTelefonoAeropuerto.getText();
+        if (telefonoAeropuerto == null || "".equals(telefonoAeropuerto)) {
             JOptionPane.showMessageDialog(this, "El teléfono de información a aeropuertos no puede estar vacío.",
                     "Error en el teléfono de información a aeropuertos.", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if (!airportPhone.matches("\\d{3}\\d{1,12}")) {
+        if (!telefonoAeropuerto.matches("\\d{3}\\d{1,12}")) {
             JOptionPane.showMessageDialog(this, "El teléfono de información a aeropuertos no cumple con los requisitos.",
                     "Error en el teléfono de información a aeropuertos.", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -195,11 +196,13 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         comboPrefijo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnMenu = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuAyuda = new javax.swing.JMenu();
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
@@ -256,6 +259,14 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
             }
         });
 
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaatras.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -266,7 +277,9 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
                         .addGap(177, 177, 177)
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addContainerGap()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(454, 570, Short.MAX_VALUE)
@@ -349,9 +362,14 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
                             .addComponent(jLabel7))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMenu)
-                    .addComponent(btnModificar))
-                .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMenu)
+                            .addComponent(btnModificar))
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
         );
 
         menuAyuda.setText("Ayuda");
@@ -414,6 +432,12 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         openWebView("https://noelia-2.gitbook.io/ayuda3/");
     }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        CompaniasPanelCRUD companiasPanelCRUD = new CompaniasPanelCRUD();
+        companiasPanelCRUD.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -452,6 +476,7 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> comboPrefijo;
     private javax.swing.JTextField inputCodigo;
     private javax.swing.JTextField inputDireccion;
