@@ -1,12 +1,32 @@
 package com.mycompany.actividad1.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 /**
  *
  * @author noeli
  */
 public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
+
+    private JFXPanel fxPanel;
+    private JFrame frame;
+    private Map<JComponent, String> contextualHelpMap;
 
     /**
      * Creates new form VuelosDiariosPanelCRUD
@@ -17,6 +37,46 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
         btnCancelaciones.setBackground(new Color(186, 213, 255));
         btnModificaciones.setBackground(new Color(186, 213, 255));
         btnConsultas.setBackground(new Color(186, 213, 255));
+
+        setHelp();
+    }
+
+    private void setHelp() {
+        fxPanel = new JFXPanel();
+        frame = new JFrame("Ayuda");
+        frame.setSize(new Dimension(500, 600));
+        frame.add(fxPanel);
+
+        contextualHelpMap = new HashMap<>();
+        contextualHelpMap.put(btnMenu, "https://noelia-2.gitbook.io/ayuda1/pagina-principal/control-menu-principal");
+
+        setContextualHelp(contextualHelpMap);
+    }
+
+    private void setContextualHelp(Map<JComponent, String> map) {
+        for (JComponent comp : map.keySet()) {
+            KeyStroke f1KeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0);
+            InputMap inputMap = comp.getInputMap(JComponent.WHEN_FOCUSED);
+            ActionMap actionMap = comp.getActionMap();
+            inputMap.put(f1KeyStroke, "showContextualHelp");
+            actionMap.put("showContextualHelp", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String helpURL = map.get(comp);
+                    openWebView(helpURL);
+                }
+            });
+        }
+    }
+
+    private void openWebView(String url) {
+        Platform.runLater(() -> {
+            WebView webView = new WebView();
+            WebEngine webEngine = webView.getEngine();
+            webEngine.load(url);
+            fxPanel.setScene(new Scene(webView));
+            frame.setVisible(true);
+        });
     }
 
     /**
@@ -34,6 +94,9 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
         btnModificaciones = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
+        menuBar = new javax.swing.JMenuBar();
+        menuAyuda = new javax.swing.JMenu();
+        menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +177,23 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
                         .addGap(17, 17, 17))))
         );
 
+        menuAyuda.setText("Ayuda");
+        menuAyuda.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+
+        menuAyudaPrincipal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menuAyudaPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuAyudaPrincipal.setText("Ayuda principal");
+        menuAyudaPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAyudaPrincipalActionPerformed(evt);
+            }
+        });
+        menuAyuda.add(menuAyudaPrincipal);
+
+        menuBar.add(menuAyuda);
+
+        setJMenuBar(menuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,6 +248,10 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnModificacionesActionPerformed
 
+    private void menuAyudaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaPrincipalActionPerformed
+        openWebView("https://noelia-2.gitbook.io/ayuda1/");
+    }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,5 +294,8 @@ public class VuelosDiariosPanelCRUD extends javax.swing.JFrame {
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnModificaciones;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu menuAyuda;
+    private javax.swing.JMenuItem menuAyudaPrincipal;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }

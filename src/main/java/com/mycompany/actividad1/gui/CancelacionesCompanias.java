@@ -29,9 +29,6 @@ import javax.swing.KeyStroke;
 public class CancelacionesCompanias extends javax.swing.JFrame {
 
     private LogicaCompania logicaCompania = new LogicaCompania();
-    private JFXPanel fxPanel;
-    private JFrame frame;
-    private Map<JComponent, String> contextualHelpMap;
  
     /**
      * Creates new form CancelacionesCompanias
@@ -41,52 +38,11 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         comboCompania.setBackground(Color.WHITE);
         btnBorrar.setBackground(new Color(186, 213, 255));
 
-        setHelp();
-
         List<Compania> companias = logicaCompania.getListaCompanias();
 
         comboCompania.setModel(new DefaultComboBoxModel(companias.toArray()));
 
         // Incluir método toString() en la clase Compania   
-    }
-
-    private void setHelp() {
-        fxPanel = new JFXPanel();
-        frame = new JFrame("Ayuda");
-        frame.setSize(new Dimension(500, 500));
-        frame.add(fxPanel);
-
-        contextualHelpMap = new HashMap<>();
-        contextualHelpMap.put(comboCompania, "https://noelia-2.gitbook.io/untitled-2/main/combo");
-        contextualHelpMap.put(btnBorrar, "https://noelia-2.gitbook.io/untitled-2/main/delete");
-
-        setContextualHelp(contextualHelpMap);
-    }
-
-    private void setContextualHelp(Map<JComponent, String> map) {
-        for (JComponent comp : map.keySet()) {
-            KeyStroke f1KeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0);
-            InputMap inputMap = comp.getInputMap(JComponent.WHEN_FOCUSED);
-            ActionMap actionMap = comp.getActionMap();
-            inputMap.put(f1KeyStroke, "showContextualHelp");
-            actionMap.put("showContextualHelp", new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String helpURL = map.get(comp);
-                    openWebView(helpURL);
-                }
-            });
-        }
-    }
-
-    private void openWebView(String url) {
-        Platform.runLater(() -> {
-            WebView webView = new WebView();
-            WebEngine webEngine = webView.getEngine();
-            webEngine.load(url);
-            fxPanel.setScene(new Scene(webView));
-            frame.setVisible(true);
-        });
     }
 
     /**
@@ -104,9 +60,6 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         comboCompania = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        menuBar = new javax.swing.JMenuBar();
-        menuAyuda = new javax.swing.JMenu();
-        menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -130,11 +83,6 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         });
 
         comboCompania.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        comboCompania.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboCompaniaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Seleccione una compañía:");
@@ -179,27 +127,10 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
                             .addComponent(comboCompania, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(53, 53, 53)
                 .addComponent(btnBorrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addComponent(btnMenu)
                 .addGap(21, 21, 21))
         );
-
-        menuAyuda.setText("Ayuda");
-        menuAyuda.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-
-        menuAyudaPrincipal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        menuAyudaPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        menuAyudaPrincipal.setText("Ayuda principal");
-        menuAyudaPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAyudaPrincipalActionPerformed(evt);
-            }
-        });
-        menuAyuda.add(menuAyudaPrincipal);
-
-        menuBar.add(menuAyuda);
-
-        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,10 +146,6 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuAyudaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaPrincipalActionPerformed
-        openWebView("https://noelia-2.gitbook.io/untitled-2/");
-    }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
-
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         logicaCompania.borrarCompania(((Compania) comboCompania.getSelectedItem()).getPrefijo());
 
@@ -231,10 +158,6 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
         menuPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
-
-    private void comboCompaniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompaniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboCompaniaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,8 +201,5 @@ public class CancelacionesCompanias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenu menuAyuda;
-    private javax.swing.JMenuItem menuAyudaPrincipal;
-    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }

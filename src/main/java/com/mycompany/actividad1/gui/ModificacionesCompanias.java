@@ -3,9 +3,25 @@ package com.mycompany.actividad1.gui;
 import com.mycompany.actividad1.dto.Compania;
 import com.mycompany.actividad1.logica.LogicaCompania;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -14,6 +30,9 @@ import javax.swing.JOptionPane;
 public class ModificacionesCompanias extends javax.swing.JFrame {
 
     private LogicaCompania logicaCompanias = new LogicaCompania();
+    private JFXPanel fxPanel;
+    private JFrame frame;
+    private Map<JComponent, String> contextualHelpMap;
 
     /**
      * Creates new form ModificacionesCompanias
@@ -35,6 +54,46 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         comboPrefijo.setModel(new DefaultComboBoxModel(prefijos));
 
         inputPrecargado();
+
+        setHelp();
+    }
+
+    private void setHelp() {
+        fxPanel = new JFXPanel();
+        frame = new JFrame("Ayuda");
+        frame.setSize(new Dimension(500, 600));
+        frame.add(fxPanel);
+
+        contextualHelpMap = new HashMap<>();
+        contextualHelpMap.put(comboPrefijo, "https://noelia-2.gitbook.io/ayuda3/pagina-principal/combo-prefijo");
+
+        setContextualHelp(contextualHelpMap);
+    }
+
+    private void setContextualHelp(Map<JComponent, String> map) {
+        for (JComponent comp : map.keySet()) {
+            KeyStroke f1KeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0);
+            InputMap inputMap = comp.getInputMap(JComponent.WHEN_FOCUSED);
+            ActionMap actionMap = comp.getActionMap();
+            inputMap.put(f1KeyStroke, "showContextualHelp");
+            actionMap.put("showContextualHelp", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String helpURL = map.get(comp);
+                    openWebView(helpURL);
+                }
+            });
+        }
+    }
+
+    private void openWebView(String url) {
+        Platform.runLater(() -> {
+            WebView webView = new WebView();
+            WebEngine webEngine = webView.getEngine();
+            webEngine.load(url);
+            fxPanel.setScene(new Scene(webView));
+            frame.setVisible(true);
+        });
     }
 
     private void inputPrecargado() {
@@ -136,6 +195,9 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         comboPrefijo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnMenu = new javax.swing.JButton();
+        menuBar = new javax.swing.JMenuBar();
+        menuAyuda = new javax.swing.JMenu();
+        menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,6 +354,23 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
+        menuAyuda.setText("Ayuda");
+        menuAyuda.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+
+        menuAyudaPrincipal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menuAyudaPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuAyudaPrincipal.setText("Ayuda principal");
+        menuAyudaPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAyudaPrincipalActionPerformed(evt);
+            }
+        });
+        menuAyuda.add(menuAyudaPrincipal);
+
+        menuBar.add(menuAyuda);
+
+        setJMenuBar(menuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -330,6 +409,10 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         menuPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void menuAyudaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaPrincipalActionPerformed
+        openWebView("https://noelia-2.gitbook.io/ayuda3/");
+    }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,5 +470,8 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu menuAyuda;
+    private javax.swing.JMenuItem menuAyudaPrincipal;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }
