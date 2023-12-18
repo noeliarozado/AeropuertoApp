@@ -245,7 +245,9 @@ public class LogicaVueloDiario {
                 }
             }
         }
-        Collections.sort(vuelosCompania, Comparator.comparing(VueloDiario::getHoraSalidaReal));
+        Collections.sort(vuelosCompania, Comparator
+                .comparing(VueloDiario::getFecha)
+                .thenComparing(VueloDiario::getHoraSalidaReal));
 
         return vuelosCompania;
     }
