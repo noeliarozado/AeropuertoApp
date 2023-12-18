@@ -36,6 +36,7 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
 
     private LogicaVueloDiario logicaVueloDiario = new LogicaVueloDiario();
     private LogicaVuelo logicaVuelo = new LogicaVuelo();
+    
     private JFXPanel fxPanel;
     private JFrame frame;
     private Map<JComponent, String> contextualHelpMap;
@@ -153,11 +154,13 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         comboVueloDiario = new javax.swing.JComboBox<>();
+        btnVolver = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuAyuda = new javax.swing.JMenu();
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
@@ -220,12 +223,22 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
             }
         });
 
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaatras.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(15, 15, 15)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +314,9 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(btnMenu)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMenu))
                         .addGap(32, 32, 32))))
         );
 
@@ -339,10 +354,8 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (validarComponente()) {
             DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/M/yyyy");
-//            String codigoVuelo = (String) comboVueloDiario.getSelectedItem();
             Vuelo selectedVuelo = (Vuelo) comboVueloDiario.getSelectedItem();
             String codigoVuelo = selectedVuelo.getCodigoVuelo();
-
             LocalDate fecha = LocalDate.parse(inputFecha.getText(), formatterDate);
             LocalTime horaSalida = LocalTime.parse(inputHoraSalida.getText());
             LocalTime horaLlegada = LocalTime.parse(inputHoraLlegada.getText());
@@ -363,6 +376,12 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
     private void menuAyudaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaPrincipalActionPerformed
         openWebView("https://noelia-2.gitbook.io/ayuda6/");
     }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VuelosDiariosPanelCRUD vuelosDiariosPanelCRUD = new VuelosDiariosPanelCRUD();
+        vuelosDiariosPanelCRUD.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -403,6 +422,7 @@ public class AltasVuelosDiarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> comboVueloDiario;
     private javax.swing.JFormattedTextField inputFecha;
     private javax.swing.JFormattedTextField inputHoraLlegada;

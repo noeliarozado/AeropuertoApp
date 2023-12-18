@@ -33,6 +33,7 @@ import javax.swing.KeyStroke;
 public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
 
     private LogicaVueloDiario logicaVueloDiario = new LogicaVueloDiario();
+    
     private JFXPanel fxPanel;
     private JFrame frame;
     private Map<JComponent, String> contextualHelpMap;
@@ -47,7 +48,6 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
         btnModificar.setBackground(new Color(186, 213, 255));
 
         List<VueloDiario> vuelosDiarios = logicaVueloDiario.getListaVueloDiario();
-
         String[] codigosVuelo = new String[vuelosDiarios.size()];
         int i = 0;
         for (VueloDiario vueloDiario : vuelosDiarios) {
@@ -178,11 +178,13 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
         inputFecha = new javax.swing.JTextField();
         inputPlazas = new javax.swing.JTextField();
         btnMenu = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuAyuda = new javax.swing.JMenu();
         menuAyudaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(214, 240, 248));
 
@@ -248,6 +250,14 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
             }
         });
 
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaatras.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -257,10 +267,9 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addContainerGap(172, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnModificar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(68, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel10)
@@ -277,10 +286,15 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
                             .addComponent(inputHoraLlegada)
                             .addComponent(inputPrecioAsiento)
                             .addComponent(inputFecha)
-                            .addComponent(inputPlazas))))
-                .addGap(53, 53, 53)
+                            .addComponent(inputPlazas)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModificar)))
+                .addGap(83, 83, 83)
                 .addComponent(btnMenu)
-                .addGap(47, 47, 47))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,11 +337,20 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(inputPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 47, Short.MAX_VALUE)))
-                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnModificar)
-                    .addComponent(btnMenu))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(btnModificar)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnMenu)
+                                .addGap(15, 15, 15))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23))))))
         );
 
         menuAyuda.setText("Ayuda");
@@ -390,6 +413,12 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
         openWebView("https://noelia-2.gitbook.io/ayuda5/");
     }//GEN-LAST:event_menuAyudaPrincipalActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VuelosDiariosPanelCRUD vuelosDiariosPanelCRUD = new VuelosDiariosPanelCRUD();
+        vuelosDiariosPanelCRUD.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -429,6 +458,7 @@ public class ModificacionesVuelosDiarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> comboCodigo;
     private javax.swing.JTextField inputFecha;
     private javax.swing.JFormattedTextField inputHoraLlegada;
