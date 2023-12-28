@@ -8,7 +8,7 @@ import java.beans.*;
 
 /**
  *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ApiTemperaturasBeanInfo extends SimpleBeanInfo {
 

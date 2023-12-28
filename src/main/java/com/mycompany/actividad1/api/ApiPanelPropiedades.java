@@ -1,8 +1,7 @@
 package com.mycompany.actividad1.api;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ApiPanelPropiedades extends javax.swing.JPanel {
 
@@ -83,5 +82,5 @@ public class ApiPanelPropiedades extends javax.swing.JPanel {
         String apiKey = inputAPI.getText();
         return apiKey;
     }
-    
+
 }

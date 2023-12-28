@@ -9,8 +9,9 @@ import java.io.Serializable;
 import org.json.JSONObject;
 
 /**
+ * @author Noelia Rozado
  *
- * @author noeli
+ * Panel que muestra las temperaturas máxima y mínima de una ciudad
  */
 public class ApiTemperaturas extends javax.swing.JPanel implements Serializable {
 
@@ -32,6 +33,14 @@ public class ApiTemperaturas extends javax.swing.JPanel implements Serializable 
         this.apiInformacion = apiInformacion;
     }
 
+    /**
+     * Obtiene las temperaturas máxima y mínima para una ciudad específica
+     *
+     * @param codigoCiudad código de la ciudad para la cual se desean obtener
+     * las temperaturas
+     * @return objeto ApiTemperaturaCiudad con información sobre las
+     * temperaturas de la ciudad
+     */
     public ApiTemperaturaCiudad getTemperaturasCiudad(int codigoCiudad) {
         if (codigoCiudad == 0) {
             return null;
@@ -70,6 +79,11 @@ public class ApiTemperaturas extends javax.swing.JPanel implements Serializable 
         return null;
     }
 
+    /**
+     * Cambia la ciudad y sus temperaturas
+     *
+     * @param codigoCiudad código de la nueva ciudad
+     */
     public void cambiarCiudad(int codigoCiudad) {
         apiInformacion.setCodigo(codigoCiudad);
         if (codigoCiudad == 0) {
