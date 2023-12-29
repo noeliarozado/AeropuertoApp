@@ -4,11 +4,25 @@ import java.util.Objects;
 
 /**
  *
- * @author noeli
+ * @author Noelia Rozado
+ *
+ * Clase que almacena los datos básicos de un aeropuerto
  */
 public class Aeropuerto {
+
+    /**
+     * Código IATA del aeropuerto
+     */
     private String codigoIATA;
+
+    /**
+     * Nombre de la localidad donde está ubicado el aeropuerto
+     */
     private String nombreCiudad;
+
+    /**
+     * Código del municipio donde está ubicado el aeropuerto
+     */
     private int codigoMunicipio;
 
     public Aeropuerto(String codigoIATA, String nombreCiudad, int codigoMunicipio) {
@@ -17,26 +31,56 @@ public class Aeropuerto {
         this.codigoMunicipio = codigoMunicipio;
     }
 
+    /**
+     * Obtiene el código IATA del aeropuerto
+     *
+     * @return código IATA del aeropuerto
+     */
     public String getCodigoIATA() {
         return codigoIATA;
     }
 
+    /**
+     * Establece el código IATA del aeropuerto
+     *
+     * @param codigoIATA código IATA del aeropuerto
+     */
     public void setCodigoIATA(String codigoIATA) {
         this.codigoIATA = codigoIATA;
     }
 
+    /**
+     * Obtiene el nombre de la ciudad donde está el aeropuerto
+     *
+     * @return nombre de la ciudad
+     */
     public String getNombreCiudad() {
         return nombreCiudad;
     }
 
+    /**
+     * Establece el nombre de la ciudad donde está el aeropuerto
+     *
+     * @param nombreCiudad nombre de la ciudad
+     */
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
     }
 
+    /**
+     * Obtiene el código del municipio donde está el aeropuerto
+     *
+     * @return código del municipio
+     */
     public int getCodigoMunicipio() {
         return codigoMunicipio;
     }
 
+    /**
+     * Establece el código del municipio donde está el aeropuerto.
+     *
+     * @param codigoMunicipio código del municipio
+     */
     public void setCodigoMunicipio(int codigoMunicipio) {
         this.codigoMunicipio = codigoMunicipio;
     }
@@ -67,5 +111,5 @@ public class Aeropuerto {
         final Aeropuerto other = (Aeropuerto) obj;
         return Objects.equals(this.codigoIATA, other.codigoIATA);
     }
-    
+
 }

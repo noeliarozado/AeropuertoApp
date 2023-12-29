@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  *
- * @author noeli
+ * @author Noelia Rozado
  */
 public final class VueloTableModel extends AbstractTableModel {
 

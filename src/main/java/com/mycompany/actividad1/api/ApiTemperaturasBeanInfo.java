@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Beans/BeanInfo.java to edit this template
- */
 package com.mycompany.actividad1.api;
 
 import java.beans.*;
 
 /**
- *
  * @author Noelia Rozado
  */
 public class ApiTemperaturasBeanInfo extends SimpleBeanInfo {
@@ -901,5 +896,5 @@ public class ApiTemperaturasBeanInfo extends SimpleBeanInfo {
                 return null;
         }
     }
-    
+
 }
