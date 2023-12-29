@@ -22,8 +22,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasLlegadas extends javax.swing.JFrame {
 
@@ -49,6 +48,11 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         formatearTabla();
     }
 
+    /**
+     * Actualiza la tabla con las llegadas al aeropuerto
+     *
+     * @param date fecha actual
+     */
     private void actualizarTabla(LocalDate date) {
         List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarVuelosLlegada(date);
 
@@ -59,6 +63,9 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         tblLlegadas.setModel(dataModel);
     }
 
+    /**
+     * Formatea el encabezado de la tabla
+     */
     private void formatearEncabezadoTabla() {
         JTableHeader encabezado = tblLlegadas.getTableHeader();
 
@@ -74,10 +81,13 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
                 return c;
             }
         };
-        
+
         encabezado.setDefaultRenderer(headerRenderer);
     }
 
+    /**
+     * Formatea la apariencia de la tabla
+     */
     private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -335,6 +345,7 @@ public class ConsultasLlegadas extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasLlegadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

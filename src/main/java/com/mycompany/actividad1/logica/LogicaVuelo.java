@@ -7,19 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Noelia Rozado
  *
- * @author noeli
+ * Clase que almacena la lógica relacionada con la gestión de un vuelo
  */
 public class LogicaVuelo {
+
     private static final String RUTA_FICHERO_CSV = "vuelos.csv";
     private static final String RUTA_FICHERO_SERIALIZADO = "vuelos.ser";
 
+    /**
+     * Lista de vuelos
+     */
     private List<Vuelo> listaVuelos;
 
     private String nombreAeropuertoActual;
 
     public LogicaVuelo() {
-
         listaVuelos = cargarCSV();
         //listaVuelos = cargarDatosSerializados();
         if (listaVuelos == null) {
@@ -27,6 +31,12 @@ public class LogicaVuelo {
         }
     }
 
+    /**
+     * Carga los datos desde el archivo CSV que contiene la información sobre
+     * los vuelos
+     *
+     * @return lista de vuelos
+     */
     private List<Vuelo> cargarCSV() {
         List<Vuelo> cargarVuelos = new ArrayList<>();
 
@@ -69,7 +79,7 @@ public class LogicaVuelo {
                         aeropuertoDestino = aeropuerto;
                     }
                 }
-                Vuelo vuelo = new Vuelo(codigoVuelo, aeropuertoOrigen, aeropuertoDestino, numeroPlazas, horaOficialSalida, 
+                Vuelo vuelo = new Vuelo(codigoVuelo, aeropuertoOrigen, aeropuertoDestino, numeroPlazas, horaOficialSalida,
                         horaOficialLlegada, dias);
                 cargarVuelos.add(vuelo);
             }
@@ -79,6 +89,9 @@ public class LogicaVuelo {
         return cargarVuelos;
     }
 
+    /**
+     * Guarda los datos en el archivo CSV
+     */
     private void guardarCSV() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(RUTA_FICHERO_CSV))) {
             for (Vuelo vuelo : listaVuelos) {
@@ -89,6 +102,13 @@ public class LogicaVuelo {
         }
     }
 
+    /**
+     * Formatea los datos de un vuelo para incluir en un archivo CSV
+     *
+     * @param vuelo datos del vuelo a formatear
+     * @return cadena con los datos del vuelo según el formato de los archivos
+     * CSV
+     */
     private static String formatearCSV(Vuelo vuelo) {
         return vuelo.getCodigoVuelo() + ","
                 + vuelo.getAeropuertoOrigen().getCodigoIATA() + ","
@@ -99,6 +119,11 @@ public class LogicaVuelo {
                 + vuelo.getDias();
     }
 
+    /**
+     * Carga los datos desde un archivo serializado
+     *
+     * @return lista de vuelos
+     */
     private List<Vuelo> cargarArchivoSerializado() {
         List<Vuelo> datosCargados = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(RUTA_FICHERO_SERIALIZADO))) {
@@ -112,6 +137,9 @@ public class LogicaVuelo {
         return datosCargados;
     }
 
+    /**
+     * Guarda los datos en un archivo serializado
+     */
     private void guardarArchivoSerializado() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(RUTA_FICHERO_SERIALIZADO))) {
             outputStream.writeObject(listaVuelos);
@@ -120,16 +148,31 @@ public class LogicaVuelo {
         }
     }
 
+    /**
+     * Obtiene la lista de vuelos
+     *
+     * @return lista de vuelos
+     */
     public List<Vuelo> getListaVuelos() {
         return listaVuelos;
     }
 
+    /**
+     * Añade un nuevo vuelo a la lista y guarda los datos en el archivo CSV
+     *
+     * @param vuelo vuelo a añadir
+     */
     public void anadirVuelo(Vuelo vuelo) {
         listaVuelos.add(vuelo);
         guardarCSV();
         //guardarArchivoSerializado();
     }
 
+    /**
+     * Borra un vuelo de la lista y guarda los cambios en el archivo CSV
+     *
+     * @param codigoVuelo código del vuelo a borrar
+     */
     public void borrarVuelo(String codigoVuelo) {
         Vuelo vueloABorrar = null;
         for (Vuelo vuelo : listaVuelos) {
@@ -145,6 +188,11 @@ public class LogicaVuelo {
         }
     }
 
+    /**
+     * Actualiza la información de un vuelo en el archivo CSV
+     *
+     * @param vueloActualizado vuelo con la información actualizada
+     */
     public void actualizarVuelo(Vuelo vueloActualizado) {
         for (Vuelo vuelo : listaVuelos) {
             if (vuelo.getCodigoVuelo().equals(vueloActualizado.getCodigoVuelo())) {
@@ -161,6 +209,12 @@ public class LogicaVuelo {
         }
     }
 
+    /**
+     * Obtiene una lista de vuelos para una compañía específica
+     *
+     * @param codigoVuelo código de la compañía aérea
+     * @return lista de vuelos para la compañía especificada
+     */
     public List<Vuelo> vuelosPorCompania(String codigoVuelo) {
         List<Vuelo> vuelosCompania = new ArrayList<>();
         for (Vuelo vuelo : listaVuelos) {

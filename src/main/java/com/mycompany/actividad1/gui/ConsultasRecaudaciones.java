@@ -8,8 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasRecaudaciones extends javax.swing.JFrame {
 
@@ -228,6 +227,7 @@ public class ConsultasRecaudaciones extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasRecaudaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

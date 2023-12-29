@@ -15,8 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * @author Noelia Rozado
  *
- * @author noeli
+ * Clase que almacena la lógica relacionada con la gestión de un vuelo diario
  */
 public class LogicaVueloDiario {
 
@@ -26,6 +27,9 @@ public class LogicaVueloDiario {
 
     private String nombreAeropuerto;
 
+    /**
+     * Lista de vuelos diarios
+     */
     private List<VueloDiario> listaVuelosDiarios;
 
     LogicaVuelo logicaVuelos = new LogicaVuelo();
@@ -40,6 +44,12 @@ public class LogicaVueloDiario {
         }
     }
 
+    /**
+     * Carga los datos desde el archivo CSV que contiene la información sobre
+     * los vuelos diarios
+     *
+     * @return lista de vuelos diarios
+     */
     private List<VueloDiario> cargarCSV() {
         List<VueloDiario> datosCargados = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(RUTA_ARCHIVO_CSV))) {
@@ -72,6 +82,9 @@ public class LogicaVueloDiario {
         return datosCargados;
     }
 
+    /**
+     * Guarda los datos en el archivo CSV
+     */
     private void guardarCSV() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(RUTA_ARCHIVO_CSV))) {
             for (VueloDiario vueloDiario : listaVuelosDiarios) {
@@ -82,6 +95,13 @@ public class LogicaVueloDiario {
         }
     }
 
+    /**
+     * Formatea los datos de un vuelo diario para incluir en un archivo CSV
+     *
+     * @param vuelo datos del vuelo a formatear
+     * @return cadena con los datos del vuelo según el formato de los archivos
+     * CSV
+     */
     private String formatearCSV(VueloDiario vueloDiario) {
         String fechaFormateada = vueloDiario.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
@@ -93,6 +113,11 @@ public class LogicaVueloDiario {
                 + vueloDiario.getPrecio();
     }
 
+    /**
+     * Carga los datos desde un archivo serializado
+     *
+     * @return lista de vuelos diarios
+     */
     private List<VueloDiario> cargarArchivoSerializado() {
         List<VueloDiario> datosCargados = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO_SERIALIZADO))) {
@@ -105,6 +130,9 @@ public class LogicaVueloDiario {
         return datosCargados;
     }
 
+    /**
+     * Guarda los datos en un archivo serializado
+     */
     private void guardarArchivoSerializado() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(RUTA_ARCHIVO_SERIALIZADO))) {
             outputStream.writeObject(listaVuelosDiarios);
@@ -113,16 +141,32 @@ public class LogicaVueloDiario {
         }
     }
 
+    /**
+     * Obtiene la lista de vuelos diarios
+     *
+     * @return lista de vuelos diarios
+     */
     public List<VueloDiario> getListaVueloDiario() {
         return listaVuelosDiarios;
     }
 
+    /**
+     * Añade un nuevo vuelo diario a la lista y guarda los datos en el archivo
+     * CSV
+     *
+     * @param vuelosDiarios vuelo diario a añadir
+     */
     public void anadirVueloDiario(VueloDiario vuelosDiarios) {
         listaVuelosDiarios.add(vuelosDiarios);
         guardarCSV();
         // guardarArchivoSerializado();
     }
 
+    /**
+     * Borra un vuelo diario de la lista y guarda los cambios en el archivo CSV
+     *
+     * @param codigoVuelo código del vuelo diario a borrar
+     */
     public void borrarVueloDiario(String codigoVuelo) {
         listaVuelosDiarios.removeIf(vuelosDiarios
                 -> vuelosDiarios.getCodigoVuelo().equals(codigoVuelo));
@@ -130,6 +174,11 @@ public class LogicaVueloDiario {
         //guardarArchivoSerializado();
     }
 
+    /**
+     * Actualiza la información de un vuelo en el archivo CSV
+     *
+     * @param vueloDiarioActualizado vuelo diario con la información actualizada
+     */
     public void actualizarVueloDiario(VueloDiario vueloDiarioActualizado) {
         for (VueloDiario vueloDiario : listaVuelosDiarios) {
             if (vueloDiario.getCodigoVuelo().equals(vueloDiarioActualizado.getCodigoVuelo())) {
@@ -146,6 +195,12 @@ public class LogicaVueloDiario {
         System.out.println("Vuelo no encontrado para el código: " + vueloDiarioActualizado.getCodigoVuelo());
     }
 
+    /**
+     * Ordena los vuelos de salida en una fecha específica
+     *
+     * @param fecha fecha específica
+     * @return lista ordenada de vuelos de salida en la fecha específica
+     */
     public List ordenarVuelosSalida(LocalDate fecha) {
         List<VueloDiario> vuelosCompania = new ArrayList<>();
 
@@ -164,6 +219,12 @@ public class LogicaVueloDiario {
         return vuelosCompania;
     }
 
+    /**
+     * Ordena los vuelos de llegada en una fecha específica
+     *
+     * @param fecha fecha específica
+     * @return lista ordenada de vuelos de llegada en la fecha específica
+     */
     public List ordenarVuelosLlegada(LocalDate fecha) {
         List<VueloDiario> vuelosCompania = new ArrayList<>();
 
@@ -182,6 +243,12 @@ public class LogicaVueloDiario {
         return vuelosCompania;
     }
 
+    /**
+     * Muestra los vuelos de salida en una fecha específica
+     *
+     * @param fecha fecha específica
+     * @return lista de vuelos de salida en la fecha especificada
+     */
     public List<VueloDiario> mostrarSalidasEnFecha(LocalDate fecha) {
         List<VueloDiario> salidas = new ArrayList<>();
 
@@ -195,7 +262,13 @@ public class LogicaVueloDiario {
         return salidas;
     }
 
-    public List<VueloDiario> mostrarLlegasEnFecha(Date fecha) {
+    /**
+     * Muestra los vuelos de llegada en una fecha específica
+     *
+     * @param fecha fecha específica
+     * @return lista de vuelos de llegada en la fecha especificada
+     */
+    public List<VueloDiario> mostrarLlegadasEnFecha(Date fecha) {
         List<VueloDiario> llegadas = new ArrayList<>();
 
         for (VueloDiario vueloDiario : listaVuelosDiarios) {
@@ -208,6 +281,14 @@ public class LogicaVueloDiario {
         return llegadas;
     }
 
+    /**
+     * Obtiene una lista de vuelos para una compañía específica en una fecha
+     * dada
+     *
+     * @param codigoVuelo código de la compañía aérea
+     * @param fecha fecha específica
+     * @return lista de vuelos para la compañía y fecha especificadas
+     */
     public List<VueloDiario> vuelosPorCompaniaEnFecha(String codigoVuelo, LocalDate fecha) {
         List<VueloDiario> vuelosCompanias = new ArrayList<>();
 
@@ -219,6 +300,13 @@ public class LogicaVueloDiario {
         return vuelosCompanias;
     }
 
+    /**
+     * Muestra los vuelos de una compañía específica en una fecha dada
+     *
+     * @param inicialesCodigo código de la compañía
+     * @param fecha fecha específica
+     * @return Lista de vuelos de la compañía en la fecha especificada
+     */
     public List<VueloDiario> mostrarDiasCompania(String inicialesCodigo, LocalDate fecha) {
         List<VueloDiario> vuelosCompania = new ArrayList<>();
 
@@ -230,6 +318,12 @@ public class LogicaVueloDiario {
         return vuelosCompania;
     }
 
+    /**
+     * Ordena los vuelos por fecha y hora
+     *
+     * @param codigoAeropuertoDestino código IATA del aeropuerto de destino.
+     * @return Lista ordenada de vuelos diarios por destino y fecha.
+     */
     public List ordenarDestinos(String codigoAeropuertoDestino) {
         List<VueloDiario> vuelosCompania = new ArrayList<>();
 
@@ -252,6 +346,12 @@ public class LogicaVueloDiario {
         return vuelosCompania;
     }
 
+    /**
+     * Calcula las recaudaciones para una fecha dada
+     *
+     * @param fecha fecha en la que se calculan las recaudaciones
+     * @return recaudaciones para la fecha especificada
+     */
     public double recaudacionesDiarias(LocalDate fecha) {
         double recaudaciones = 0;
         for (VueloDiario vueloDiario : listaVuelosDiarios) {

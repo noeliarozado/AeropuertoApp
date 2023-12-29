@@ -3,8 +3,7 @@ package com.mycompany.actividad1.gui;
 import java.awt.Color;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -13,7 +12,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        
+
         btnGestionCompanias.setBackground(new Color(186, 213, 255));
         btnGestionVuelos.setBackground(new Color(186, 213, 255));
     }
@@ -141,6 +140,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

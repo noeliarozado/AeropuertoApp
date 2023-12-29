@@ -6,16 +6,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 /**
+ * @author Noelia Rozado
  *
- * @author noeli
+ * Clase que almacena la lógica relacionada con la gestión de una compañía aérea
  */
 public class LogicaCompania {
+
     private static final String RUTA_ARCHIVO_CSV = "companias.csv";
     private static final String RUTA_ARCHIVO_SERIALIZADO = "companias.ser";
 
+    /**
+     * Lista de compañías aereas
+     */
     private List<Compania> listaCompanias;
 
     public LogicaCompania() {
@@ -26,6 +29,12 @@ public class LogicaCompania {
         }
     }
 
+    /**
+     * Carga los datos desde el archivo CSV que contiene la información sobre
+     * las compañías aéreas
+     *
+     * @return lista de compañías aéreas
+     */
     private List<Compania> cargarCSV() {
         List<Compania> companiasCargadas = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(RUTA_ARCHIVO_CSV))) {
@@ -40,7 +49,7 @@ public class LogicaCompania {
                 String telefonoPasajero = datos[5];
                 String telefonoAeropuerto = datos[6];
 
-                Compania compania = new Compania(prefijo, codigo, nombreCompania, direccion, municipio, telefonoPasajero, 
+                Compania compania = new Compania(prefijo, codigo, nombreCompania, direccion, municipio, telefonoPasajero,
                         telefonoAeropuerto);
                 companiasCargadas.add(compania);
             }
@@ -50,6 +59,9 @@ public class LogicaCompania {
         return companiasCargadas;
     }
 
+    /**
+     * Guarda los datos en el archivo CSV
+     */
     private void guardarCSV() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(RUTA_ARCHIVO_CSV))) {
             for (Compania compania : listaCompanias) {
@@ -60,6 +72,13 @@ public class LogicaCompania {
         }
     }
 
+    /**
+     * Formatea los datos de una compañía aérea para incluir en un archivo CSV
+     *
+     * @param compania datos de la compañía a formatear
+     * @return cadena con los datos de la compañía según el formato de los
+     * archivos CSV
+     */
     private String formatearCSV(Compania compania) {
         return compania.getPrefijo() + ","
                 + compania.getCodigo() + ","
@@ -70,6 +89,11 @@ public class LogicaCompania {
                 + compania.getTelefonoAeropuerto();
     }
 
+    /**
+     * Carga los datos desde un archivo serializado
+     *
+     * @return lista de compañías aéreas
+     */
     private List<Compania> cargarArchivoSerializado() {
         List<Compania> datosCargados = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO_SERIALIZADO))) {
@@ -82,6 +106,9 @@ public class LogicaCompania {
         return datosCargados;
     }
 
+    /**
+     * Guarda los datos en un archivo serializado
+     */
     private void guardarArchivoSerializado() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(RUTA_ARCHIVO_SERIALIZADO))) {
             outputStream.writeObject(listaCompanias);
@@ -90,16 +117,33 @@ public class LogicaCompania {
         }
     }
 
+    /**
+     * Obtiene la lista de compañías aéreas
+     *
+     * @return lista de compañías
+     */
     public List<Compania> getListaCompanias() {
         return listaCompanias;
     }
 
+    /**
+     * Añade una nueva compañía aérea a la lista y guarda los datos en el
+     * archivo CSV
+     *
+     * @param compania compañía a añadir
+     */
     public void anadirCompania(Compania compania) {
         listaCompanias.add(compania);
         guardarCSV();
         //guardarArchivoSerializado();
     }
 
+    /**
+     * Borra una compañía aérea de la lista y guarda los cambios en el archivo
+     * CSV
+     *
+     * @param prefijo prefijo de la compañía a borrar
+     */
     public void borrarCompania(int prefijo) {
         Compania companiaBorrar = null;
         for (Compania compania : listaCompanias) {
@@ -115,6 +159,11 @@ public class LogicaCompania {
         }
     }
 
+    /**
+     * Actualiza la información de una compañía aérea en el archivo CSV
+     *
+     * @param companiaActualizada compañía con la información actualizada
+     */
     public void actualizarCompania(Compania companiaActualizada) {
         for (Compania compania : listaCompanias) {
             if (compania.getPrefijo() == companiaActualizada.getPrefijo()) {

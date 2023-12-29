@@ -3,8 +3,7 @@ package com.mycompany.actividad1.gui;
 import java.awt.Color;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasVuelosDiarios extends javax.swing.JFrame {
 
@@ -202,6 +201,8 @@ public class ConsultasVuelosDiarios extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasVuelosDiarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

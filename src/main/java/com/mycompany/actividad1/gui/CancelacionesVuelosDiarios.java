@@ -7,8 +7,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class CancelacionesVuelosDiarios extends javax.swing.JFrame {
 
@@ -186,6 +185,7 @@ public class CancelacionesVuelosDiarios extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CancelacionesVuelosDiarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

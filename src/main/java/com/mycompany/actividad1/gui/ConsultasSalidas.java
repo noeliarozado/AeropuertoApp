@@ -22,8 +22,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasSalidas extends javax.swing.JFrame {
 
@@ -36,7 +35,7 @@ public class ConsultasSalidas extends javax.swing.JFrame {
      */
     public ConsultasSalidas() {
         initComponents();
-        
+
         btnSeleccionarFecha.setBackground(new Color(186, 213, 255));
 
         actualizarTabla(LocalDate.now());
@@ -45,10 +44,15 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         apiTemperaturasMiAeropuerto.cambiarCiudad(miAeropuerto.getCodigoMunicipio());
 
         formatearEncabezadoTabla();
-        
+
         formatearTabla();
     }
 
+    /**
+     * Actualiza la tabla con las salidas del aeropuerto
+     *
+     * @param date fecha actual
+     */
     private void actualizarTabla(LocalDate fecha) {
         List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarVuelosSalida(fecha);
 
@@ -59,6 +63,9 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         tblSalidas.setModel(dataModel);
     }
 
+    /**
+     * Formatea el encabezado de la tabla
+     */
     private void formatearEncabezadoTabla() {
         JTableHeader encabezado = tblSalidas.getTableHeader();
 
@@ -74,10 +81,13 @@ public class ConsultasSalidas extends javax.swing.JFrame {
                 return c;
             }
         };
-        
+
         encabezado.setDefaultRenderer(headerRenderer);
     }
 
+    /**
+     * Formatea la apariencia de la tabla
+     */
     private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -329,6 +339,7 @@ public class ConsultasSalidas extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

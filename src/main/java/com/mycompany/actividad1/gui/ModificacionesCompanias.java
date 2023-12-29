@@ -24,8 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ModificacionesCompanias extends javax.swing.JFrame {
 
@@ -59,6 +58,9 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         setHelp();
     }
 
+    /**
+     * Carga la información de la compañía
+     */
     private void inputPrecargado() {
         List<Compania> companias = logicaCompanias.getListaCompanias();
 
@@ -80,6 +82,9 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Muestra la ayuda principal
+     */
     private void setHelp() {
         fxPanel = new JFXPanel();
         frame = new JFrame("Ayuda");
@@ -92,6 +97,9 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         setContextualHelp(contextualHelpMap);
     }
 
+    /**
+     * Asigna la ayuda contextual
+     */
     private void setContextualHelp(Map<JComponent, String> map) {
         for (JComponent comp : map.keySet()) {
             KeyStroke f1KeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0);
@@ -108,6 +116,11 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Abre una ventana que muestra la ayuda
+     *
+     * @param url URL de la página de ayuda
+     */
     private void openWebView(String url) {
         Platform.runLater(() -> {
             WebView webView = new WebView();
@@ -118,6 +131,12 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Valida los componentes antes de guardar la modificación de una compañía
+     * aérea
+     *
+     * @return true si los datos son válidos y false si no lo son
+     */
     private boolean validarComponente() {
         String codigo = inputCodigo.getText();
         if (codigo == null || "".equals(codigo)) {
@@ -463,6 +482,7 @@ public class ModificacionesCompanias extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ModificacionesCompanias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

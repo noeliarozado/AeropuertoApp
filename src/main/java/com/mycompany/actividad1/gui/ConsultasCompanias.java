@@ -15,8 +15,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasCompanias extends javax.swing.JFrame {
 
@@ -52,6 +51,9 @@ public class ConsultasCompanias extends javax.swing.JFrame {
         formatearTabla();
     }
 
+    /**
+     * Formatea el encabezado de la tabla
+     */
     private void formatearEncabezadoTabla() {
         JTableHeader encabezado = tblCompanias.getTableHeader();
 
@@ -70,6 +72,9 @@ public class ConsultasCompanias extends javax.swing.JFrame {
         encabezado.setDefaultRenderer(headerRenderer);
     }
 
+    /**
+     * Formatea la apariencia de la tabla
+     */
     private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -239,6 +244,7 @@ public class ConsultasCompanias extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasCompanias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

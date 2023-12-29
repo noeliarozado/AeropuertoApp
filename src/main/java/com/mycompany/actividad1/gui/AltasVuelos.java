@@ -26,8 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class AltasVuelos extends javax.swing.JFrame {
 
@@ -55,6 +54,9 @@ public class AltasVuelos extends javax.swing.JFrame {
         setHelp();
     }
 
+    /**
+     * Muestra la ayuda principal
+     */
     private void setHelp() {
         fxPanel = new JFXPanel();
         frame = new JFrame("Ayuda");
@@ -69,6 +71,9 @@ public class AltasVuelos extends javax.swing.JFrame {
         setContextualHelp(contextualHelpMap);
     }
 
+    /**
+     * Asigna la ayuda contextual
+     */
     private void setContextualHelp(Map<JComponent, String> map) {
         for (JComponent comp : map.keySet()) {
             KeyStroke f1KeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0);
@@ -85,6 +90,11 @@ public class AltasVuelos extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Abre una ventana que muestra la ayuda
+     *
+     * @param url URL de la página de ayuda
+     */
     private void openWebView(String url) {
         Platform.runLater(() -> {
             WebView webView = new WebView();
@@ -95,6 +105,11 @@ public class AltasVuelos extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Valida los componentes antes de registrar un vuelo
+     *
+     * @return true si los datos son válidos y false si no lo son
+     */
     private boolean validarcomponente() {
         String dias = inputDias.getText();
         if (dias == null || "".equals(dias)) {
@@ -338,7 +353,7 @@ public class AltasVuelos extends javax.swing.JFrame {
             String horaSalida = inputHoraSalida.getText();
             String horaLlegada = inputHoraLlegada.getText();
             String dias = inputDias.getText();
-            
+
             logicaVuelo.anadirVuelo(new Vuelo(codigoVuelo, aeropuertoOrigen, aeropuertoDestino, numeroPlazas,
                     horaSalida, horaLlegada, dias));
         }
@@ -385,6 +400,7 @@ public class AltasVuelos extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AltasVuelos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

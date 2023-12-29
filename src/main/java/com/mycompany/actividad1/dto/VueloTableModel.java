@@ -5,12 +5,20 @@ import javax.swing.table.*;
 import java.util.*;
 
 /**
- *
  * @author Noelia Rozado
+ *
+ * Clase que representa un modelo de tabla para mostrar los vuelos diarios
  */
 public final class VueloTableModel extends AbstractTableModel {
 
+    /**
+     * Lista de vuelos diarios
+     */
     List<VueloDiario> vuelosDiarios;
+
+    /**
+     * Lista de vuelos
+     */
     List<Vuelo> listaVuelo;
 
     String[] titulos = {"Codigo vuelo", "Fecha", "Hora de salida", "Hora de llegada", "Aeropuerto origen",
@@ -22,16 +30,33 @@ public final class VueloTableModel extends AbstractTableModel {
         this.listaVuelo = listaVuelo;
     }
 
+    /**
+     * Devuelve el número de filas de la tabla
+     *
+     * @return número de filas
+     */
     @Override
     public int getRowCount() {
         return vuelosDiarios.size();
     }
 
+    /**
+     * Devuelve el número de columnas de la tabla
+     *
+     * @return número de columnas
+     */
     @Override
     public int getColumnCount() {
         return titulos.length;
     }
 
+    /**
+     * Devuelve el valor en la posición especificada en la tabla.
+     *
+     * @param fila índice de la fila
+     * @param columna índice de la columna
+     * @return valor en la posición especificada
+     */
     @Override
     public Object getValueAt(int fila, int columna) {
         switch (columna) {
@@ -71,16 +96,34 @@ public final class VueloTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Devuelve la clase de la columna especificada
+     *
+     * @param columna índice de la columna
+     * @return clase de la columna
+     */
     @Override
     public Class getColumnClass(int columna) {
         return getValueAt(0, columna).getClass();
     }
 
+    /**
+     * Devuelve el nombre de la columna especificada
+     *
+     * @param columna índice de la columna
+     * @return nombre de la columna
+     */
     @Override
     public String getColumnName(int columna) {
         return titulos[columna];
     }
 
+    /**
+     * Obtiene el código de municipio del destino en la fila especificada
+     *
+     * @param fila índice de la fila
+     * @return código de municipio del destino
+     */
     public int getCodigoDestinoEn(int fila) {
         String codigoVuelo = vuelosDiarios.get(fila).getCodigoVuelo();
         for (Vuelo vuelo : listaVuelo) {
@@ -91,6 +134,12 @@ public final class VueloTableModel extends AbstractTableModel {
         return 0;
     }
 
+    /**
+     * Obtiene el código de municipio del destino en la fila especificada
+     *
+     * @param fila índice de la fila
+     * @return código de municipio del destino
+     */
     public int getCodigoOrigenEn(int fila) {
         String codigoVuelo = vuelosDiarios.get(fila).getCodigoVuelo();
         for (Vuelo vuelo : listaVuelo) {

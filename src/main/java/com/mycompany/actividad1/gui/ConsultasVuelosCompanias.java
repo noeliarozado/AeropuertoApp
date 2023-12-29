@@ -1,6 +1,5 @@
 package com.mycompany.actividad1.gui;
 
-
 import com.mycompany.actividad1.dto.Compania;
 import com.mycompany.actividad1.dto.VueloTableModel;
 import com.mycompany.actividad1.dto.VueloDiario;
@@ -25,8 +24,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasVuelosCompanias extends javax.swing.JFrame {
 
@@ -56,6 +54,31 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
 
         actualizarTabla(LocalDate.now());
 
+        formatearEncabezadoTabla();
+
+        formatearTabla();
+    }
+
+    /**
+     * Actualiza la tabla con los vuelos por compañía
+     *
+     * @param date fecha actual
+     */
+    private void actualizarTabla(LocalDate date) {
+        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.mostrarDiasCompania((String) comboCompanias.getSelectedItem(),
+                date);
+
+        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
+
+        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
+
+        tblVuelosCompania.setModel(dataModel);
+    }
+
+    /**
+     * Formatea el encabezado de la tabla
+     */
+    private void formatearEncabezadoTabla() {
         JTableHeader encabezado = tblVuelosCompania.getTableHeader();
 
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
@@ -70,23 +93,12 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
                 return c;
             }
         };
-
         encabezado.setDefaultRenderer(headerRenderer);
-
-        formatearTabla();
     }
 
-    private void actualizarTabla(LocalDate date) {
-        List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.mostrarDiasCompania((String) comboCompanias.getSelectedItem(),
-                date);
-
-        List<Vuelo> listaVuelos = logicaVuelos.getListaVuelos();
-
-        VueloTableModel dataModel = new VueloTableModel(vuelosDiarios, listaVuelos);
-
-        tblVuelosCompania.setModel(dataModel);
-    }
-
+    /**
+     * Formatea la apariencia de la tabla
+     */
     private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -373,6 +385,7 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasVuelosCompanias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -23,8 +23,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
- * @author noeli
+ * @author Noelia Rozado
  */
 public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
 
@@ -59,6 +58,11 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         formatearTabla();
     }
 
+        /**
+     * Actualiza la tabla con los vuelos para los próximos siete días
+     *
+     * @param date fecha actual
+     */
     private void actualizarTabla(LocalDate fecha) {
 
         List<VueloDiario> vuelosDiarios = logicaVuelosDiarios.ordenarDestinos((String) comboDestinos.getSelectedItem());
@@ -70,6 +74,9 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         tblDestinos.setModel(dataModel);
     }
 
+        /**
+     * Formatea el encabezado de la tabla
+     */
     private void formatearEncabezadoTabla() {
         JTableHeader encabezado = tblDestinos.getTableHeader();
 
@@ -89,6 +96,9 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         encabezado.setDefaultRenderer(headerRenderer);
     }
 
+        /**
+     * Formatea la apariencia de la tabla
+     */
     private void formatearTabla() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -329,6 +339,7 @@ public class ConsultasVuelosSieteDias extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultasVuelosSieteDias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
