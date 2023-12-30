@@ -272,7 +272,7 @@ public class ConsultasVuelosCompanias extends javax.swing.JFrame {
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(570, 570, 570)
                         .addComponent(btnMenu)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(264, 264, 264)
                 .addComponent(btnSeleccionarFecha)
