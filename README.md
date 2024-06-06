@@ -10,6 +10,8 @@ Permite consultar la siguiente información:
 - Recaudaciones de vuelos completados para un día concreto.
 - Lista de vuelos previstos a un destino concreto los siguientes siete días a la fecha actual ordenados por fecha y hora de salida.
 
+[Casos de prueba unitaria](https://github.com/noeliarozado/NUnitAutobusesApp.git) sobre métodos de la aplicación.
+
 ## CAPTURAS DE PANTALLA DE LA APLICACIÓN
 
 ## Modificación de vuelos
