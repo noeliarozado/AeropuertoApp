@@ -10,6 +10,8 @@ Permite consultar la siguiente información:
 - Recaudaciones de vuelos completados para un día concreto.
 - Lista de vuelos previstos a un destino concreto los siguientes siete días a la fecha actual ordenados por fecha y hora de salida.
 
+Además, incluye un componente que utiliza una llamada a la **API REST** de la AEMET para mostrar las temperaturas mínimas y máximas previstas para un aeropuerto en el día actual.
+
 [Casos de prueba unitaria](https://github.com/noeliarozado/NUnitAutobusesApp.git) sobre métodos de la aplicación.
 
 ## CAPTURAS DE PANTALLA DE LA APLICACIÓN
